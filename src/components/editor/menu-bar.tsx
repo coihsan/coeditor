@@ -1,7 +1,7 @@
 import { Editor } from "@tiptap/react"
 import React from "react"
 import { BoxIcon, CodeIcon, FontBoldIcon, FontItalicIcon, HeadingIcon, ListBulletIcon, PilcrowIcon, QuoteIcon, StrikethroughIcon, TextAlignCenterIcon, TextAlignJustifyIcon, TextAlignLeftIcon, TextAlignRightIcon } from "@radix-ui/react-icons"
-import { Toggle } from "../ui/toggle"
+import ToggleMenu from "../global/toggle-menu"
 
 type Props = {
     editor: Editor | null,
@@ -11,46 +11,47 @@ const MenuBar: React.FC<Props> = ({ editor }) => {
     if (!editor) return null
 
     return (
-        <div className="flex items-center flex-wrap gap-1">
-            <Toggle onClick={() => editor.chain().focus().toggleBold().run()}
+        <div className="flex items-center flex-wrap gap-1 h-9">
+            <ToggleMenu label="Bold" onClick={() => editor.chain().focus().toggleBold().run()}
                 className={editor.isActive('bold') ? 'is-active' : ''}
             >
                 <FontBoldIcon />
-            </Toggle>
-            <Toggle onClick={() => editor.chain().focus().toggleItalic().run()}
+            </ToggleMenu>
+            <ToggleMenu label="italic" onClick={() => editor.chain().focus().toggleItalic().run()}
                 className={editor.isActive('italic') ? 'is-active' : ''}
             >
                 <FontItalicIcon />
-            </Toggle>
-            <Toggle onClick={() => editor.chain().focus().toggleStrike().run()}
+            </ToggleMenu>
+            <ToggleMenu label="Strikethrough" onClick={() => editor.chain().focus().toggleStrike().run()}
                 className={editor.isActive('strike') ? 'is-active' : ''}
             >
                 <StrikethroughIcon />
-            </Toggle>
-            <Toggle
-                onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-                className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
+            </ToggleMenu>
+            <ToggleMenu label="Heading"
+                onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
             >
                 <HeadingIcon />
-            </Toggle>
-            <Toggle onClick={() => editor.chain().focus().setParagraph().run()}
+            </ToggleMenu>
+            <ToggleMenu label="Paragraph"
+                onClick={() => editor.chain().focus().setParagraph().run()}
                 className={editor.isActive('paragraph') ? 'is-active' : ''}
             >
                 <PilcrowIcon />
-            </Toggle>
-            <Toggle onClick={() => editor.chain().focus().setTextAlign('left').run()} className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}>
+            </ToggleMenu>
+            <ToggleMenu label="Align left" onClick={() => editor.chain().focus().setTextAlign('left').run()} className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}>
                 <TextAlignLeftIcon />
-            </Toggle>
-            <Toggle onClick={() => editor.chain().focus().setTextAlign('center').run()} className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}>
+            </ToggleMenu>
+            <ToggleMenu label="Align center" onClick={() => editor.chain().focus().setTextAlign('center').run()} className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}>
                 <TextAlignCenterIcon />
-            </Toggle>
-            <Toggle onClick={() => editor.chain().focus().setTextAlign('right').run()} className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}>
+            </ToggleMenu>
+            <ToggleMenu label="Align right" onClick={() => editor.chain().focus().setTextAlign('right').run()} className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}>
                 <TextAlignRightIcon />
-            </Toggle>
-            <Toggle onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
+            </ToggleMenu>
+            <ToggleMenu label="Justify" onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
                 <TextAlignJustifyIcon />
-            </Toggle>
-            <Toggle
+            </ToggleMenu>
+            <ToggleMenu label="Code"
                 onClick={() => editor.chain().focus().toggleCode().run()}
                 disabled={
                     !editor.can()
@@ -62,25 +63,25 @@ const MenuBar: React.FC<Props> = ({ editor }) => {
                 className={editor.isActive('code') ? 'is-active' : ''}
             >
                 <CodeIcon />
-            </Toggle>
-            <Toggle
+            </ToggleMenu>
+            <ToggleMenu label="Block code"
                 onClick={() => editor.chain().focus().toggleCodeBlock().run()}
                 className={editor.isActive('codeBlock') ? 'is-active' : ''}
             >
                 <BoxIcon />
-            </Toggle>
-            <Toggle
+            </ToggleMenu>
+            <ToggleMenu label="Blockquote"
                 onClick={() => editor.chain().focus().toggleBlockquote().run()}
                 className={editor.isActive('blockquote') ? 'is-active' : ''}
             >
                 <QuoteIcon />
-            </Toggle>
-            <Toggle
+            </ToggleMenu>
+            <ToggleMenu label="Bulleted list"
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={editor.isActive('bulletList') ? 'is-active' : ''}
             >
                 <ListBulletIcon />
-            </Toggle>
+            </ToggleMenu>
         </div>
     )
 }

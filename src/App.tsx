@@ -1,25 +1,27 @@
 import './App.css'
-import Editor from './components/global/editor'
+import Editor from './components/editor/editor'
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import Sidebar from './components/global/sidebar'
+import NoteLink from './components/notelist/note-link'
+import { ThemeProvider } from './providers/theme-provider'
 
 function App() {
 
   return (
-    <>
-      <div className='w-screen h-screen'>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className='w-screen h-screen flex'>
+        <Sidebar />
         <ResizablePanelGroup
           direction="horizontal"
-          className="rounded-lg border"
         >
-          <ResizablePanel defaultSize={15}>
-            <div className="flex h-full items-center justify-center">
-              <span className="font-semibold">Sidebar Content</span>
-            </div>
+          <ResizablePanel defaultSize={25}>
+              <NoteLink />
           </ResizablePanel>
+          <ResizableHandle withHandle />
           <ResizableHandle />
           <ResizablePanel defaultSize={75}>
             <div className="flex h-full items-center justify-center">
@@ -28,7 +30,7 @@ function App() {
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>
-    </>
+    </ThemeProvider>
   )
 }
 

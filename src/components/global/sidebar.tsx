@@ -1,39 +1,21 @@
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandSeparator,
-} from "@/components/ui/command"
-import {
-    AlertDialog,
-  } from "@/components/ui/alert-dialog"
+import { GearIcon, PlusCircledIcon, StarFilledIcon } from "@radix-ui/react-icons"
+import ButtonMenu from "./button-menu"
+
 const Sidebar = () => {
     return (
-        <div>
-            <AlertDialog>
-                <Command>
-                    <CommandInput placeholder="Type a command or search..." />
-                    <CommandList>
-                        <CommandEmpty>No results found.</CommandEmpty>
-                        <CommandGroup heading="Suggestions">
-                            <CommandItem>Calendar</CommandItem>
-                            <CommandItem>Search Emoji</CommandItem>
-                            <CommandItem>Calculator</CommandItem>
-                        </CommandGroup>
-                        <CommandSeparator />
-                        <CommandGroup heading="Settings">
-                            <CommandItem>Profile</CommandItem>
-                            <CommandItem>Billing</CommandItem>
-                            <CommandItem>Settings</CommandItem>
-                        </CommandGroup>
-                    </CommandList>
-                </Command>
-            </AlertDialog>
-
-        </div>
+        <aside className="p-2 border-r-[1px] bg-muted">
+            <div className="grid gap-6">
+                <ButtonMenu label='New notes' variant={'ghost'} size={'icon'}>
+                    <PlusCircledIcon width={22} height={22} />
+                </ButtonMenu>
+                <ButtonMenu label='Favourites' variant={'ghost'} size={'icon'}>
+                    <StarFilledIcon width={22} height={22} />
+                </ButtonMenu>
+                <ButtonMenu label='Settings' variant={'ghost'} size={'icon'}>
+                    <GearIcon width={22} height={22} />
+                </ButtonMenu>
+            </div>
+        </aside>
     )
 }
 export default Sidebar

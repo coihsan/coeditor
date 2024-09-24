@@ -7,6 +7,23 @@ export default {
   ],
   theme: {
   	extend: {
+		typography:{
+			DEFAULT:{
+				css:{
+					color: 'hsl(var(--foreground))',
+				},
+		},
+			dark:{
+				css:{
+					color: 'hsl(var(--foreground))',
+				},
+			},
+			light:{
+				css:{
+					color: 'hsl(var(--foreground))',
+				},
+			}
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -56,6 +73,6 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')],
 }
 
