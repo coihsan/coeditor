@@ -1,1 +1,3 @@
-export const data = `<p>Example Text</p>`
+
+
+export const data = `<p>Write something...</p>`

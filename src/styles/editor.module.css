@@ -1,9 +1,6 @@
 .editor {
     accent-color: hsl(var(--brand-600));
   }
-  .element{
-    background-color: black;
-  }
   .editor > div {
     padding: 1rem;
   }
@@ -12,11 +9,6 @@
     border-color: transparent;
     outline: transparent;
   }
-.prose{
-  width: 100%;
-  margin-top: 0;
-  background-color: brown;
-}
   /* Heading styles */
   h1, 
   h2, 

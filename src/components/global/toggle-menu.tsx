@@ -25,7 +25,7 @@ const ToggleMenu : React.FC<ButtonMenuProps> = ({
     disabled
   }) => {
     return (
-        <TooltipProvider delayDuration={100}>
+        <TooltipProvider delayDuration={500}>
             <Tooltip>
                 <TooltipTrigger>
                     <Toggle

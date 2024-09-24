@@ -5,15 +5,20 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import Sidebar from './components/global/sidebar'
+import Sidebar from './components/sidebar/sidebar'
 import NoteLink from './components/notelist/note-link'
+import {isMobile} from 'react-device-detect';
 import { ThemeProvider } from './providers/theme-provider'
+import MobileNotice from './components/global/mobile-notice'
 
 function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div className='w-screen h-screen flex'>
+      {isMobile ? (
+        <MobileNotice />
+      ) : (
+        <div className='w-screen h-screen flex'>
         <Sidebar />
         <ResizablePanelGroup
           direction="horizontal"
@@ -30,6 +35,7 @@ function App() {
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>
+      )}
     </ThemeProvider>
   )
 }

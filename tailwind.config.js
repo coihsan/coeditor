@@ -8,21 +8,21 @@ export default {
   theme: {
   	extend: {
 		typography:{
-			DEFAULT:{
-				css:{
-					color: 'hsl(var(--foreground))',
-				},
-		},
-			dark:{
-				css:{
-					color: 'hsl(var(--foreground))',
-				},
-			},
-			light:{
-				css:{
-					color: 'hsl(var(--foreground))',
-				},
-			}
+		// 	DEFAULT:{
+		// 		css:{
+		// 			color: 'hsl(var(--foreground))',
+		// 		},
+		// },
+		// 	dark:{
+		// 		css:{
+		// 			color: 'hsl(var(--foreground))',
+		// 		},
+		// 	},
+		// 	light:{
+		// 		css:{
+		// 			color: 'hsl(var(--foreground))',
+		// 		},
+		// 	}
 		},
   		borderRadius: {
   			lg: 'var(--radius)',

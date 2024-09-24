@@ -5,10 +5,11 @@ import StarterKit from '@tiptap/starter-kit'
 import MenuBar from './menu-bar'
 import { data } from './content'
 import { cn } from "@/lib/utils"
-import { CheckIcon, ClipboardIcon, DownloadIcon, Pencil2Icon, StarIcon, TrashIcon } from '@radix-ui/react-icons'
 import TextAlign from '@tiptap/extension-text-align'
 import { ModeToggle } from '../global/mode-toggle'
 import ButtonMenu from '../global/button-menu'
+import { ArrowDownload24Regular, Checkmark24Regular, Clipboard24Regular, Delete24Regular, NoteEdit24Regular, StarAdd24Regular } from '@fluentui/react-icons'
+import { LabelText } from '@/lib/label-text'
 
 const Editor = () => {
     const [editable, setEditable] = useState(false)
@@ -30,9 +31,9 @@ const Editor = () => {
     }, [editable])
 
     return (
-        <div className='w-full h-full grid'>
+        <div className='w-full h-full flex flex-col'>
             {editable &&
-                <div className='flex items-center justify-between w-full sticky p-2 top-0 border-b-2 border-muted-fourground z-50'>
+                <div className='flex items-center justify-between sticky top-0 bg-muted z-50'>
                     <MenuBar editor={editor} />
                 </div>
             }
@@ -40,23 +41,20 @@ const Editor = () => {
                 className={cn('prose prose-zinc h-screen max-w-none overflow-y-scroll', css.editor)}
                 editor={editor}
             />
-            <pre className="w-full border rounded-lg p-2 bg-slate-900 text-slate-50 overflow-auto">
-                {JSON.stringify(editor?.getJSON(), null, 2)}
-            </pre>
-            <div className='sticky w-full bg-background bottom-0 mt-0 border-t-2 border-muted-fourground flex items-center justify-between z-50'>
-                <div className='flex'>
-                    <ButtonMenu label='Edit notes' variant={'ghost'} className='rounded-none' size={'lg'} action={() => setEditable(!editable)}>{editable ? <CheckIcon /> : <Pencil2Icon />}</ButtonMenu>
-                    <ButtonMenu label='Add to favourite' variant={'ghost'} className='rounded-none' size={'lg'}>
-                        <StarIcon />
+            <div className='sticky w-full bg-background bottom-0 h-auto mt-0 border-t-2 border-muted-fourground flex items-center justify-between z-50'>
+                <div className='flex flex-nowrap'>
+                    <ButtonMenu side="top" label={editable ? LabelText.SAVE_NOTE : LabelText.EDIT_NOTE} variant={'ghost'} className='rounded-none' size={'default'} action={() => setEditable(!editable)}>{editable ? <Checkmark24Regular /> : <NoteEdit24Regular />}</ButtonMenu>
+                    <ButtonMenu side="top" label={LabelText.MARK_AS_FAVORITE} variant={'ghost'} className='rounded-none' size={'default'}>
+                        <StarAdd24Regular />
                     </ButtonMenu>
-                    <ButtonMenu label='Delete notes' variant={'ghost'} className='rounded-none' size={'lg'}>
-                        <TrashIcon />
+                    <ButtonMenu side="top" label={LabelText.DELETE} variant={'ghost'} className='rounded-none' size={'default'}>
+                        <Delete24Regular />
                     </ButtonMenu>
-                    <ButtonMenu label='Copy notes' variant={'ghost'} className='rounded-none' size={'lg'}>
-                        <ClipboardIcon />
+                    <ButtonMenu side="top" label={LabelText.COPY_NOTES} variant={'ghost'} className='rounded-none' size={'default'}>
+                        <Clipboard24Regular />
                     </ButtonMenu>
-                    <ButtonMenu label='Download notes' variant={'ghost'} className='rounded-none' size={'lg'}>
-                        <DownloadIcon />
+                    <ButtonMenu side="top" label={LabelText.DOWNLOAD_NOTES} variant={'ghost'} className='rounded-none' size={'default'}>
+                        <ArrowDownload24Regular />
                     </ButtonMenu>
                 </div>
                 <div>

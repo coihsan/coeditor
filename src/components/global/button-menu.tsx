@@ -14,6 +14,7 @@ interface ButtonMenuProps {
     variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | null | undefined
     size?:  "default" | "sm" | "lg" | "icon" | null | undefined
     label: string
+    side?: "right" | "top" | "bottom" | "left" | undefined
   }
 
 const ButtonMenu : React.FC<ButtonMenuProps> = ({
@@ -22,11 +23,12 @@ const ButtonMenu : React.FC<ButtonMenuProps> = ({
     action,
     variant,
     size,
-    label
+    label,
+    side
   }) => {
     return (
-        <TooltipProvider delayDuration={0}>
-            <Tooltip>
+        <TooltipProvider delayDuration={500}>
+            <Tooltip defaultOpen={false}>
                 <TooltipTrigger>
                     <Button
                         variant={variant}
@@ -37,7 +39,7 @@ const ButtonMenu : React.FC<ButtonMenuProps> = ({
                         {children}
                     </Button>
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent side={side} align="center">
                     <p>{label}</p>
                 </TooltipContent>
             </Tooltip>
