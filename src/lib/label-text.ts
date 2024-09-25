@@ -4,7 +4,7 @@ export enum LabelText {
     NOTES = 'Notes',
     COPY_NOTES = 'Copy notes',
     EDIT_NOTE = 'Edit notes',
-    SAVE_NOTE = 'Save notes',
+    PREVIEW_NOTE = 'Preview notes',
     CREATE_NEW_NOTE = 'Create new note',
     DOWNLOAD_NOTES = 'Download notes',
     ADD_CONTENT_NOTE = 'Please add content to your note',

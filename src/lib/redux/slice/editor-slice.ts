@@ -1,6 +1,7 @@
+import { EditorState } from '@/lib/types';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+const initialState : EditorState = {
   editable: false,
 };
 

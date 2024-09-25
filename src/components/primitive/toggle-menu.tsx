@@ -19,10 +19,10 @@ interface ButtonMenuProps {
 
 const ToggleMenu : React.FC<ButtonMenuProps> = ({
     children,
-    className,
     onClick,
     size,
     label,
+    className,
     disabled,
     side
   }) => {
@@ -32,7 +32,7 @@ const ToggleMenu : React.FC<ButtonMenuProps> = ({
                 <TooltipTrigger>
                     <Toggle
                         size={size}
-                        className={className}
+                        className={`rounded-none aspect-square ${className ? className : ''}`}
                         onClick={onClick}
                         disabled={disabled}
                     >

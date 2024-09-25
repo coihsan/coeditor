@@ -1,8 +1,9 @@
 import { Editor } from "@tiptap/react"
 import React from "react"
 import ToggleMenu from "../primitive/toggle-menu"
-import { Code24Regular, CodeBlock24Regular, TextAlignCenter24Regular, TextAlignJustify24Regular, TextAlignLeft24Regular, TextAlignRight24Regular, TextBold24Regular, TextBulletList24Regular, TextHeader124Regular, TextHeader224Regular, TextHeader324Regular, TextItalic24Regular, TextNumberListLtr24Regular, TextQuote24Regular, TextStrikethrough24Regular, TextT24Regular } from "@fluentui/react-icons"
+import { Code24Filled, CodeBlock24Filled, TextAlignCenter24Filled, TextAlignJustify24Filled, TextAlignLeft24Filled, TextAlignRight24Filled, TextBold24Filled, TextBulletList24Filled, TextHeader124Filled, TextHeader224Filled, TextHeader324Filled, TextItalic24Filled, TextNumberListLtr24Filled, TextQuote24Filled, TextStrikethrough24Filled, TextT24Filled } from "@fluentui/react-icons"
 import { LabelMenubar } from "@/lib/label-text"
+import { ScrollArea } from "../ui/scroll-area"
 
 type Props = {
     editor: Editor | null,
@@ -12,58 +13,59 @@ const MenuBar: React.FC<Props> = ({ editor}) => {
     if (!editor) return null
 
     return (
+        <ScrollArea className="w-full">
             <div
-            className="flex items-center flex-nowrap gap-1 h-auto w-auto">
+            className="flex items-center flex-nowrap gap-1 h-auto">
                 <ToggleMenu size={'sm'} label={LabelMenubar.BOLD} onClick={() => editor.chain().focus().toggleBold().run()}
                     className={editor.isActive('bold') ? 'is-active' : ''}
                 >
-                    <TextBold24Regular />
+                    <TextBold24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.ITALIC} onClick={() => editor.chain().focus().toggleItalic().run()}
                     className={editor.isActive('italic') ? 'is-active' : ''}
                 >
-                    <TextItalic24Regular />
+                    <TextItalic24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.STRIKE} onClick={() => editor.chain().focus().toggleStrike().run()}
                     className={editor.isActive('strike') ? 'is-active' : ''}
                 >
-                    <TextStrikethrough24Regular />
+                    <TextStrikethrough24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.H1}
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                     className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
                 >
-                    <TextHeader124Regular />
+                    <TextHeader124Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.H2}
                     onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
                     className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
                 >
-                    <TextHeader224Regular />
+                    <TextHeader224Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.H3}
                     onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
                     className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
                 >
-                    <TextHeader324Regular />
+                    <TextHeader324Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.P}
                     onClick={() => editor.chain().focus().setParagraph().run()}
                     className={editor.isActive('paragraph') ? 'is-active' : ''}
                 >
-                    <TextT24Regular />
+                    <TextT24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.TEXT_ALIGN_LEFT} onClick={() => editor.chain().focus().setTextAlign('left').run()} className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}>
-                    <TextAlignLeft24Regular />
+                    <TextAlignLeft24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.TEXT_ALIGN_CENTER} onClick={() => editor.chain().focus().setTextAlign('center').run()} className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}>
-                    <TextAlignCenter24Regular />
+                    <TextAlignCenter24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.TEXT_ALIGN_RIGHT} onClick={() => editor.chain().focus().setTextAlign('right').run()} className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}>
-                    <TextAlignRight24Regular />
+                    <TextAlignRight24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.TEXT_ALIGN_JUSTIFY} onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
-                    <TextAlignJustify24Regular />
+                    <TextAlignJustify24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.CODE}
                     onClick={() => editor.chain().focus().toggleCode().run()}
@@ -76,33 +78,34 @@ const MenuBar: React.FC<Props> = ({ editor}) => {
                     }
                     className={editor.isActive('code') ? 'is-active' : ''}
                 >
-                    <Code24Regular />
+                    <Code24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.CODE_BLOCK}
                     onClick={() => editor.chain().focus().toggleCodeBlock().run()}
                     className={editor.isActive('codeBlock') ? 'is-active' : ''}
                 >
-                    <CodeBlock24Regular />
+                    <CodeBlock24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.QUOTE}
                     onClick={() => editor.chain().focus().toggleBlockquote().run()}
                     className={editor.isActive('blockquote') ? 'is-active' : ''}
                 >
-                    <TextQuote24Regular />
+                    <TextQuote24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.UL}
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
                     className={editor.isActive('bulletList') ? 'is-active' : ''}
                 >
-                    <TextBulletList24Regular />
+                    <TextBulletList24Filled className="size-5" />
                 </ToggleMenu>
                 <ToggleMenu size={'sm'} label={LabelMenubar.OL}
                     onClick={() => editor.chain().focus().toggleOrderedList().run()}
                     className={editor.isActive('orderedList') ? 'is-active' : ''}
                 >
-                    <TextNumberListLtr24Regular />
+                    <TextNumberListLtr24Filled className="size-5" />
                 </ToggleMenu>
             </div>
+        </ScrollArea>
     )
 }
 export default MenuBar

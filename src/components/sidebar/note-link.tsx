@@ -6,7 +6,8 @@ import { LabelText } from "@/lib/label-text"
 
 const NoteLink = () => {
     return (
-        <aside className="p-4">
+        <aside className="bg-muted dark:bg-slate-900 h-screen">
+            <div className="p-4">
             <div className="flex items-center justify-between mb-2">
                 <span className="text-xl font-bold">Notes</span>
                 <div>
@@ -18,7 +19,7 @@ const NoteLink = () => {
                     </ButtonMenu>
                 </div>
             </div>
-            <Input type="search" placeholder="Search..." />
+            <Input className="bg-white dark:bg-transparent" type="search" placeholder="Search..." />
             <ScrollArea className="pt-2">
                 <a href="">
                     <div className="w-full bg-muted p-3 rounded-md">
@@ -26,6 +27,7 @@ const NoteLink = () => {
                     </div>
                 </a>
             </ScrollArea>
+            </div>
         </aside>
     )
 }

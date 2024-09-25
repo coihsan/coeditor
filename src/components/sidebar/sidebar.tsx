@@ -4,24 +4,24 @@ import { Notepad24Regular, Star24Regular, NumberSymbol24Regular, Delete24Regular
 import { ModeToggle } from "../global/mode-toggle";
 const Sidebar = () => {
     return (
-        <aside className="p-2 border-r-[1px] bg-card border-muted-fourground flex flex-col justify-between h-screen">
+        <aside className="p-2 border-r-[1px] bg-slate-800 text-white border-muted-fourground flex flex-col justify-between h-screen">
             <div className="grid gap-6">
-                <ButtonMenu side="right" label={LabelText.NOTES} variant={'ghost'} size={'icon'}>
+                <ButtonMenu className="rounded-lg" side="right" label={LabelText.NOTES} variant={'ghost'} size={'icon'}>
                     <Notepad24Regular />
                 </ButtonMenu>
-                <ButtonMenu side="right" label={LabelText.TAGS} variant={'ghost'} size={'icon'}>
+                <ButtonMenu className="rounded-lg" side="right" label={LabelText.TAGS} variant={'ghost'} size={'icon'}>
                     <NumberSymbol24Regular />
                 </ButtonMenu>
-                <ButtonMenu side="right" label={LabelText.FAVORITES} variant={'ghost'} size={'icon'}>
+                <ButtonMenu className="rounded-lg" side="right" label={LabelText.FAVORITES} variant={'ghost'} size={'icon'}>
                     <Star24Regular />
                 </ButtonMenu>
-                <ButtonMenu side="right" label={LabelText.TRASH} variant={'ghost'} size={'icon'}>
+                <ButtonMenu className="rounded-lg" side="right" label={LabelText.TRASH} variant={'ghost'} size={'icon'}>
                     <Delete24Regular />
                 </ButtonMenu>
             </div>
                 <div className="grid gap-2">
                     <ModeToggle />
-                    <ButtonMenu side="right" label={LabelText.ACCOUNT} variant={'ghost'} size={'icon'}>
+                    <ButtonMenu className="rounded-lg" side="right" label={LabelText.ACCOUNT} variant={'ghost'} size={'icon'}>
                         <Person24Regular />
                     </ButtonMenu>
                 </div>

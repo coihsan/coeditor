@@ -36,3 +36,13 @@ export interface NoteItem {
     darkTheme: boolean
     notesSortKey: NotesSortKey
   }
+
+  export interface EditorState {
+    editable: boolean;
+  }
+
+  export interface AppState {
+    note: NoteState
+    settings: SettingsState
+    editor: EditorState
+  }
