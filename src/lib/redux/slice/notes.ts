@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
-import { NoteItem, NoteState } from '../types'
+import { NoteItem, NoteState } from '../../types'
 
 const initialState: NoteState = {
     notes: [],
@@ -81,7 +81,7 @@ const notesSlice = createSlice({
             : state.notes.map((note) =>
                 note.id === payload.noteId ? { ...note, category: payload.categoryId } : note
               )
-          }
+          },
     }
 })
 

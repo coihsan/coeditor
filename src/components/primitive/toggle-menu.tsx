@@ -14,6 +14,7 @@ interface ButtonMenuProps {
     size?:  "default" | "sm" | "lg" | null | undefined
     label: string
     disabled?: any
+    side?: "bottom" | "top" | "right" | "left" | undefined
   }
 
 const ToggleMenu : React.FC<ButtonMenuProps> = ({
@@ -22,10 +23,11 @@ const ToggleMenu : React.FC<ButtonMenuProps> = ({
     onClick,
     size,
     label,
-    disabled
+    disabled,
+    side
   }) => {
     return (
-        <TooltipProvider delayDuration={500}>
+        <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger>
                     <Toggle
@@ -37,7 +39,7 @@ const ToggleMenu : React.FC<ButtonMenuProps> = ({
                         {children}
                     </Toggle>
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent side={side}>
                     <p>{label}</p>
                 </TooltipContent>
             </Tooltip>

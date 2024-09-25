@@ -1,3 +1,11 @@
+.tiptap {
+  :first-child {
+    margin-top: 0;
+  }
+}
+.element{
+  background-color: var(--black);
+}
 .editor {
     accent-color: hsl(var(--brand-600));
   }

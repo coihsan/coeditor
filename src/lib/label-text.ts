@@ -35,7 +35,10 @@ export enum LabelText {
     IMPORT_BACKUP = 'Import backup',
     DOWNLOAD_ALL_NOTES = 'Download all notes',
     BACKUP_ALL_NOTES = 'Export backup',
+    FILTER= "Filter",
+    SORT= "Sort",
     
+    ACCOUNT= "Account",
     WELCOME_TO_COEDITOR = 'Welcome to COEDITOR!',
   }
 
@@ -48,15 +51,15 @@ export enum LabelText {
     H1 = 'H1',
     H2 = 'H2',
     H3 = 'H3',
-    UL = 'UL',
-    OL = 'OL',
+    UL = 'List Item',
+    OL = 'Numbered List',
     QUOTE = 'Quote',
     CODE= 'Code',
     CODE_BLOCK = 'Code Block',
     LINK = 'Link',
     IMAGE = 'Image',
-    TEXT_ALIGN_LEFT = 'Text Align Left',
-    TEXT_ALIGN_CENTER = 'Text Align Center',
-    TEXT_ALIGN_RIGHT = 'Text Align Right',
-    TEXT_ALIGN_JUSTIFY = 'Text Align Justify',
+    TEXT_ALIGN_LEFT = 'Align Left',
+    TEXT_ALIGN_CENTER = 'Align Center',
+    TEXT_ALIGN_RIGHT = 'Align Right',
+    TEXT_ALIGN_JUSTIFY = 'Align Justify',
   }

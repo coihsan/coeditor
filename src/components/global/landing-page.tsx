@@ -1,6 +1,6 @@
 import React from "react";
 import { isMobile } from 'react-device-detect'
-import MobileNotice from "./global/mobile-notice";
+import MobileNotice from "./mobile-notice";
 
 const LandingPage : React.FC = () =>{
 

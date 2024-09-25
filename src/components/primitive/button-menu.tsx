@@ -27,7 +27,7 @@ const ButtonMenu : React.FC<ButtonMenuProps> = ({
     side
   }) => {
     return (
-        <TooltipProvider delayDuration={500}>
+        <TooltipProvider>
             <Tooltip defaultOpen={false}>
                 <TooltipTrigger>
                     <Button
