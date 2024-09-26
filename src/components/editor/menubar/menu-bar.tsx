@@ -1,9 +1,8 @@
 import { Editor } from "@tiptap/react"
 import React from "react"
-import ToggleMenu from "../primitive/toggle-menu"
+import ToggleMenu from "../../primitive/toggle-menu"
 import { Code24Filled, CodeBlock24Filled, TextAlignCenter24Filled, TextAlignJustify24Filled, TextAlignLeft24Filled, TextAlignRight24Filled, TextBold24Filled, TextBulletList24Filled, TextHeader124Filled, TextHeader224Filled, TextHeader324Filled, TextItalic24Filled, TextNumberListLtr24Filled, TextQuote24Filled, TextStrikethrough24Filled, TextT24Filled } from "@fluentui/react-icons"
 import { LabelMenubar } from "@/lib/label-text"
-import { ScrollArea } from "../ui/scroll-area"
 
 type Props = {
     editor: Editor | null,
@@ -13,9 +12,8 @@ const MenuBar: React.FC<Props> = ({ editor}) => {
     if (!editor) return null
 
     return (
-        <ScrollArea className="w-full">
             <div
-            className="flex items-center flex-nowrap gap-1 h-auto">
+            className="flex items-center w-full flex-nowrap gap-1 h-auto">
                 <ToggleMenu size={'sm'} label={LabelMenubar.BOLD} onClick={() => editor.chain().focus().toggleBold().run()}
                     className={editor.isActive('bold') ? 'is-active' : ''}
                 >
@@ -105,7 +103,6 @@ const MenuBar: React.FC<Props> = ({ editor}) => {
                     <TextNumberListLtr24Filled className="size-5" />
                 </ToggleMenu>
             </div>
-        </ScrollArea>
     )
 }
 export default MenuBar

@@ -33,7 +33,7 @@ const ButtonMenu : React.FC<ButtonMenuProps> = ({
                     <Button
                         variant={variant}
                         size={size}
-                        className={`rounded-none aspect-square ${className ? className : ''}`}
+                        className={className}
                         onClick={action}
                     >
                         {children}

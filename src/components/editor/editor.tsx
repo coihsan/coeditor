@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import TextAlign from '@tiptap/extension-text-align'
 import { setEditable } from '@/lib/redux/slice/editor-slice';
 import { useAppSelector } from '@/lib/redux/hooks';
-import MenubarOptions from './menu-bar-options'
+import MenubarOptions from './menubar/menu-bar-options'
 
 const Editor = () => {
     const editable = useAppSelector((state) => state.editor.editable);

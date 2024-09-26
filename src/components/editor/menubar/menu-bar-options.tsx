@@ -7,7 +7,7 @@ import { setEditable } from '@/lib/redux/slice/editor-slice';
 import { useAppSelector } from '@/lib/redux/hooks';
 import { Edit24Regular, Eye24Regular } from "@fluentui/react-icons";
 import { LabelText } from "@/lib/label-text";
-import ButtonMenu from "../primitive/button-menu";
+import ButtonMenu from "../../primitive/button-menu";
 
 type Props = {
     editor: Editor | null,
@@ -25,32 +25,30 @@ const MenubarOptions: React.FC<Props> = ({ editor }) => {
     return (
         <header className="h-auto flex items-center flex-nowrap border-b-[1px] border-muted justify-start sticky top-0 w-full z-10">
             <div className="flex items-center">
-                <>
-                {editable ? (
-                    <>
-                        <ButtonMenu variant={'ghost'} size={'default'} label={LabelText.PREVIEW_NOTE} action={() => dispatch(setEditable(false))}>
+                <div className="">
+                    {editable ? (
+                        <ButtonMenu className="rounded-none" variant={'ghost'} size={'default'} label={LabelText.PREVIEW_NOTE} action={() => dispatch(setEditable(false))}>
                             <Eye24Regular />
                         </ButtonMenu>
-                    </>
-                ) : (
-                    <>
-                        <ButtonMenu variant={'ghost'} size={'default'} label={LabelText.EDIT_NOTE} action={() => dispatch(setEditable(true))}>
+                    ) : (
+                        <ButtonMenu className="rounded-none" variant={'ghost'} size={'default'} label={LabelText.EDIT_NOTE} action={() => dispatch(setEditable(true))}>
                             <Edit24Regular />
                         </ButtonMenu>
-                    </>
-                )
-                }
-                </>
-                {editable ? (
-                    <>
-                        <MenuBar editor={editor} />
-                    </>
-                ) : (
-                    <>
-                        <MenuNotesSettings />
-                    </>
-                )
-                }
+                    )
+                    }
+                </div>
+                <div>
+                    {editable ? (
+                        <>
+                            <MenuBar editor={editor} />
+                        </>
+                    ) : (
+                        <>
+                            <MenuNotesSettings />
+                        </>
+                    )
+                    }
+                </div>
             </div>
         </header>
     )

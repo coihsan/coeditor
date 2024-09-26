@@ -32,7 +32,7 @@ const ToggleMenu : React.FC<ButtonMenuProps> = ({
                 <TooltipTrigger>
                     <Toggle
                         size={size}
-                        className={`rounded-none aspect-square ${className ? className : ''}`}
+                        className={className}
                         onClick={onClick}
                         disabled={disabled}
                     >

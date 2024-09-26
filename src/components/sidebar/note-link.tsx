@@ -3,31 +3,41 @@ import ButtonMenu from "../primitive/button-menu"
 import { Input } from "../ui/input"
 import { ScrollArea } from "../ui/scroll-area"
 import { LabelText } from "@/lib/label-text"
+import { Separator } from "../ui/separator"
 
 const NoteLink = () => {
     return (
         <aside className="bg-muted dark:bg-slate-900 h-screen">
-            <div className="p-4">
-            <div className="flex items-center justify-between mb-2">
-                <span className="text-xl font-bold">Notes</span>
-                <div>
-                    <ButtonMenu side="bottom" variant={'ghost'} size={'icon'} label={LabelText.CREATE_NEW_NOTE}>
-                        <AddSquare24Regular />
-                    </ButtonMenu>
-                    <ButtonMenu side="bottom" variant={'ghost'} size={'icon'} label={LabelText.SETTINGS}>
-                        <Settings24Regular />
-                    </ButtonMenu>
-                </div>
-            </div>
-            <Input className="bg-white dark:bg-transparent" type="search" placeholder="Search..." />
-            <ScrollArea className="pt-2">
-                <a href="">
-                    <div className="w-full bg-muted p-3 rounded-md">
-                    Notes
+            <div className="p-2 sticky">
+                <div className="flex items-center justify-between mb-2 px-2">
+                    <span className="text-xl font-bold">Notes</span>
+                    <div>
+                        <ButtonMenu side="bottom" variant={'ghost'} size={'icon'} label={LabelText.CREATE_NEW_NOTE}>
+                            <AddSquare24Regular />
+                        </ButtonMenu>
+                        <ButtonMenu side="bottom" variant={'ghost'} size={'icon'} label={LabelText.SETTINGS}>
+                            <Settings24Regular />
+                        </ButtonMenu>
                     </div>
-                </a>
-            </ScrollArea>
+                </div>
+            <Input className="bg-white dark:bg-transparent" type="search" placeholder="Search..." />
             </div>
+            <Separator className="my-2" />
+            <ScrollArea className="h-full pb-24">
+                <div className="grid gap-2 p-2">
+                    {/* note list */}
+                    <a href="">
+                        <div className="rounded-xl border border-slate-300 dark:border-muted p-4 bg-transparent hover:bg-slate-200 hover:dark:bg-muted">
+                            <h1 className="font-medium text-base">Title</h1>
+                            <p className="text-sm text-muted-foreground">Description</p>
+                        </div>
+                    </a>
+                    {/* end of note */}
+                    <div className="p-4 flex items-center justify-center">
+                        <span className="text-sm text-muted-foreground italic">End of notes</span>
+                    </div>
+                </div>
+            </ScrollArea>
         </aside>
     )
 }
