@@ -7,9 +7,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@components/ui/*": ["./src/components/ui/*"],
+      "@/*": ["./src/client/*"],
+      "@styles/*": ["./src/client/styles/*"],
+      "@components/ui/*": ["src/client/components/ui/*"],
     }
   }
 }

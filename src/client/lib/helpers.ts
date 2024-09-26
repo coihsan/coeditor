@@ -3,7 +3,7 @@ import { NoteItem } from "./types";
 import dayjs from "dayjs";
 import { LabelText } from "./label-text";
 
-const newNote = (categoryId?: string, tagsId?: string[]): NoteItem => ({
+export const newNote = (categoryId?: string, tagsId?: string[]): NoteItem => ({
     id: v4(),
     text: '',
     created: dayjs().format(),

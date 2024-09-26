@@ -9,7 +9,7 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ searchRef, searchValue }: SearchBarProps) => {
-    const [isPending, startTransition] = useTransition()
+    const [isPending] = useTransition()
     return(
         <div className="relative">
             <Input

@@ -3,7 +3,7 @@ import css from "../../styles/editor.module.scss"
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { data } from './node-content'
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 import TextAlign from '@tiptap/extension-text-align'
 import { setEditable } from '@/lib/redux/slice/editor-slice';
 import { useAppSelector } from '@/lib/redux/hooks';
