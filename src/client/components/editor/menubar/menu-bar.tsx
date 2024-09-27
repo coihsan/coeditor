@@ -2,7 +2,7 @@ import { Editor } from "@tiptap/react"
 import React from "react"
 import ToggleMenu from "../../primitive/toggle-menu"
 import { Code24Filled, CodeBlock24Filled, TextAlignCenter24Filled, TextAlignJustify24Filled, TextAlignLeft24Filled, TextAlignRight24Filled, TextBold24Filled, TextBulletList24Filled, TextHeader124Filled, TextHeader224Filled, TextHeader324Filled, TextItalic24Filled, TextNumberListLtr24Filled, TextQuote24Filled, TextStrikethrough24Filled, TextT24Filled } from "@fluentui/react-icons"
-import { LabelMenubar } from "/lib/label-text"
+import { LabelMenubar } from "@/lib/label-text"
 
 type Props = {
     editor: Editor | null,

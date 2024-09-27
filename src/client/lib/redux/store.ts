@@ -1,10 +1,10 @@
 // src/redux/store.js
 import { configureStore } from '@reduxjs/toolkit';
-import editorReducer from './slice/editor-slice';
+import appReducer from './slice/app';
 
 const store = configureStore({
   reducer: {
-    editor: editorReducer,
+    appState: appReducer,
   },
 });
 

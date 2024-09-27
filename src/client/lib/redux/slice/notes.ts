@@ -19,14 +19,15 @@ const notesSlice = createSlice({
         addNote: (state, { payload }: PayloadAction<NoteItem>) => {
             state.notes.push({
                 id: uuid(),
+                text: payload.text,
                 created: payload.created,
                 lastUpdated: payload.lastUpdated,
-                text: payload.text,
-                isTags: payload.isTags,
                 category: payload.category,
-                isPinned: false,
-                isArchived: false,
-                isTrash: false,
+                isTags: payload.isTags,
+                isPinned: payload.isPinned,
+                isTrash: payload.isTrash,
+                isArchived: payload.isArchived,
+                status: payload.status
             })
         },
         deleteNote: (state, { payload }: PayloadAction<string>) => {

@@ -12,10 +12,9 @@ export default defineConfig({
   },
   build: {
     outDir: "./dist",
-    // manifest: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "src/client/index.html"),
+        main: path.resolve(__dirname, "src/index.html"),
       },
     },
   },

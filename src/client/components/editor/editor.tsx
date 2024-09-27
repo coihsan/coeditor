@@ -5,12 +5,12 @@ import StarterKit from '@tiptap/starter-kit'
 import { data } from './node-content'
 import { cn } from '@/lib/utils'
 import TextAlign from '@tiptap/extension-text-align'
-import { setEditable } from '@/lib/redux/slice/editor-slice';
+import { setEditableEditor } from '@/lib/redux/slice/app';
 import { useAppSelector } from '@/lib/redux/hooks';
 import MenubarOptions from './menubar/menu-bar-options'
 
 const Editor = () => {
-    const editable = useAppSelector((state) => state.editor.editable);
+    const editable = useAppSelector((state) => state.appState.editable);
 
     const editor = useEditor({
         extensions: [
@@ -26,7 +26,7 @@ const Editor = () => {
 
     useEffect(() => {
         if (editable) {
-            setEditable(true)
+            setEditableEditor(true)
         }
     }, [editable])
 

@@ -32,10 +32,6 @@ const NoteLink = () => {
                             <p className="text-sm text-muted-foreground">Description</p>
                         </div>
                     </a>
-                    {/* end of note */}
-                    <div className="p-4 flex items-center justify-center">
-                        <span className="text-sm text-muted-foreground italic">End of notes</span>
-                    </div>
                 </div>
             </ScrollArea>
         </aside>

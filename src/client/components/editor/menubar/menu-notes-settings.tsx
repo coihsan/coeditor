@@ -1,4 +1,4 @@
-import { LabelText } from "/lib/label-text";
+import { LabelText } from "@/lib/label-text";
 import { Copy24Regular, Delete24Regular, StarAdd24Regular } from "@fluentui/react-icons";
 import ButtonMenu from "../../primitive/button-menu";
 

@@ -3,7 +3,7 @@ import MenuBar from './menu-bar'
 import React, { useEffect } from "react"
 import MenuNotesSettings from "./menu-notes-settings"
 import { useDispatch } from 'react-redux';
-import { setEditable } from '@/lib/redux/slice/editor-slice';
+import { setEditableEditor } from '@/lib/redux/slice/app';
 import { useAppSelector } from '@/lib/redux/hooks';
 import { Edit24Regular, Eye24Regular } from "@fluentui/react-icons";
 import { LabelText } from "@/lib/label-text";
@@ -14,11 +14,11 @@ type Props = {
 }
 const MenubarOptions: React.FC<Props> = ({ editor }) => {
     const dispatch = useDispatch();
-    const editable = useAppSelector((state) => state.editor.editable);
+    const editable = useAppSelector((state) => state.appState.editable);
 
     useEffect(() => {
         if (editable) {
-            setEditable(true)
+            setEditableEditor(true)
         }
     }, [editable])
 
@@ -27,11 +27,11 @@ const MenubarOptions: React.FC<Props> = ({ editor }) => {
             <div className="flex items-center">
                 <div className="">
                     {editable ? (
-                        <ButtonMenu className="rounded-none" variant={'ghost'} size={'default'} label={LabelText.PREVIEW_NOTE} action={() => dispatch(setEditable(false))}>
+                        <ButtonMenu className="rounded-none" variant={'ghost'} size={'default'} label={LabelText.PREVIEW_NOTE} action={() => dispatch(setEditableEditor(false))}>
                             <Eye24Regular />
                         </ButtonMenu>
                     ) : (
-                        <ButtonMenu className="rounded-none" variant={'ghost'} size={'default'} label={LabelText.EDIT_NOTE} action={() => dispatch(setEditable(true))}>
+                        <ButtonMenu className="rounded-none" variant={'ghost'} size={'default'} label={LabelText.EDIT_NOTE} action={() => dispatch(setEditableEditor(true))}>
                             <Edit24Regular />
                         </ButtonMenu>
                     )
