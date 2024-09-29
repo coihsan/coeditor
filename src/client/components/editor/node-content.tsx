@@ -1,3 +1,3 @@
+import { requestNotes, requestCategories, requestSettings, saveState, saveSettings } from "@/api"
 
-
-export const data = `<p>Write something...</p>`
+export const data = requestNotes
