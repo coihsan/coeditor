@@ -40,6 +40,9 @@ export enum LabelText {
     
     ACCOUNT= "Account",
     WELCOME_TO_COEDITOR = 'Welcome to COEDITOR!',
+    SEARCH_TAGS= "Search tags",
+    SEARCH_FAVORITES= "Search favorites",
+    SEARCH_TRASH= "Search trash",
   }
 
   export enum LabelMenubar {

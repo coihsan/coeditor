@@ -6,11 +6,10 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
 import Sidebar from './components/sidebar/sidebar'
-import NoteLink from './components/sidebar/note-link'
 import {isMobile} from 'react-device-detect';
 import { ThemeProvider } from './providers/theme-provider'
 import MobileNotice from './components/global/mobile-notice'
-
+import SidebarOptions from './components/containers/sidebar-options';
 function App() {
 
   return (
@@ -19,12 +18,12 @@ function App() {
         <MobileNotice />
       ) : (
         <div className='w-screen h-screen flex'>
-        <Sidebar />
+          <Sidebar />
         <ResizablePanelGroup
           direction="horizontal"
         >
           <ResizablePanel defaultSize={25}>
-              <NoteLink />
+            <SidebarOptions />
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={75}>

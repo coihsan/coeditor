@@ -2,6 +2,7 @@ import { LabelText } from "@/lib/label-text";
 import ButtonMenu from "../primitive/button-menu"
 import { Notepad24Regular, Star24Regular, NumberSymbol24Regular, Delete24Regular, Person24Regular } from '@fluentui/react-icons';
 import { ModeToggle } from "../global/mode-toggle";
+
 const Sidebar = () => {
     return (
         <aside className="p-2 border-r-[1px] bg-slate-800 text-white border-muted-fourground flex flex-col justify-between h-screen">
