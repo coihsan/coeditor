@@ -2,6 +2,8 @@ import { LabelText } from "@/lib/label-text";
 import { Copy24Regular, Delete24Regular, StarAdd24Regular } from "@fluentui/react-icons";
 import ButtonMenu from "../../primitive/button-menu";
 
+// TODO : This component will be delete
+
 const MenuNotesSettings = () =>{
     
     return(

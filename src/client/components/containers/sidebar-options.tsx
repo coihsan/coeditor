@@ -1,9 +1,9 @@
 import { AddSquare24Regular, Settings24Regular } from "@fluentui/react-icons"
 import ButtonMenu from "../primitive/button-menu"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { ScrollArea } from "../ui/scroll-area"
 import { LabelText } from "@/lib/label-text"
-import React, { useState } from "react"
+import React from "react"
 import SearchBar from "../search-bar"
 import { debounceEvent } from "@/lib/helpers"
 import { searchNotes } from "@/lib/redux/slice/notes"
@@ -37,7 +37,7 @@ const SidebarOptions : React.FC<SidebarOptionsProps> = ({
       )
 
     return (
-        <aside className="p-4">
+        <aside className="p-4 border rounded-2xl mx-2 bg-zinc-100 dark:bg-background h-full">
             <div className="flex items-center justify-between mb-2">
                 <span className="text-xl font-bold">{nameContent}</span>
                 <div>

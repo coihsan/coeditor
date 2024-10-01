@@ -9,7 +9,7 @@ import { ChevronRight12Filled } from "@fluentui/react-icons";
 const LandingPage : React.FC = () =>{
 
     return(
-        <section className="w-screen h-screen flex flex-col items-center justify-center">
+        <section className="w-screen h-screen flex flex-col items-center justify-center px-6">
             <div className="flex flex-col mb-5">
                 <h1 className="text-5xl font-bold text-center">The Note Taking App <br /> for Everyone</h1>   
                 <p className="text-center mt-4 text-muted-foreground">A web-based notes app for everyone</p>

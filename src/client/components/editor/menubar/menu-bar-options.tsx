@@ -12,6 +12,7 @@ import ButtonMenu from "../../primitive/button-menu";
 type Props = {
     editor: Editor | null,
 }
+// TODO : This component will be delete
 const MenubarOptions: React.FC<Props> = ({ editor }) => {
     const dispatch = useDispatch();
     const editable = useAppSelector((state) => state.appState.editable);

@@ -1,14 +1,16 @@
 import { v4 as uuid } from 'uuid'
 import React, { useEffect, useState } from 'react';
+import dayjs from 'dayjs'
 
 const startNote = {
     id: uuid(),
-    text: '',
-    created: new Date().toISOString(),
-    lastUpdated: new Date().toISOString(),
+    content: '',
+    created: dayjs().format(),
+    lastUpdated: dayjs().format(),
     category: '',
     isTags: [],
     isPinned: false,
     isTrash: false,
-    isArchived: false,
+    isFavorite: false,
+    author: 'visitor'
 }

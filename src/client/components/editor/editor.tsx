@@ -1,16 +1,12 @@
-import { useEffect } from 'react'
 import css from "../../styles/editor.module.scss"
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { data } from './node-content'
-import { cn } from '@/lib/utils'
 import TextAlign from '@tiptap/extension-text-align'
-import { setEditableEditor } from '@/lib/redux/slice/app';
-import { useAppSelector } from '@/lib/redux/hooks';
-import MenubarOptions from './menubar/menu-bar-options'
+import { cn } from "@/lib/utils"
+import MenuBar from "./menubar/menu-bar"
 
 const Editor = () => {
-    const editable = useAppSelector((state) => state.appState.editable);
 
     const editor = useEditor({
         extensions: [
@@ -20,24 +16,16 @@ const Editor = () => {
             }),
         ],
         content: data,
-        editable: editable,
-        autofocus: true
     })
 
-    useEffect(() => {
-        if (editable) {
-            setEditableEditor(true)
-        }
-    }, [editable])
-
     return (
-        <div className='w-full h-full flex flex-col'>
-            <MenubarOptions editor={editor} />
+        <>
+            <MenuBar editor={editor} />
             <EditorContent
-                className={cn('h-full h-screen bg-white/3 max-w-none overflow-y-scroll', css.editor)}
+                className={cn('border rounded-2xl', css.editor)}
                 editor={editor}
             />
-        </div>
+        </>
     )
 }
 

@@ -1,4 +1,4 @@
-import { Editor } from "@tiptap/react"
+import { Editor, BubbleMenu } from "@tiptap/react"
 import React from "react"
 import ToggleMenu from "../../primitive/toggle-menu"
 import { Code24Filled, CodeBlock24Filled, TextAlignCenter24Filled, TextAlignJustify24Filled, TextAlignLeft24Filled, TextAlignRight24Filled, TextBold24Filled, TextBulletList24Filled, TextHeader124Filled, TextHeader224Filled, TextHeader324Filled, TextItalic24Filled, TextNumberListLtr24Filled, TextQuote24Filled, TextStrikethrough24Filled, TextT24Filled } from "@fluentui/react-icons"
@@ -12,8 +12,10 @@ const MenuBar: React.FC<Props> = ({ editor}) => {
     if (!editor) return null
 
     return (
-            <div
-            className="flex items-center w-full flex-nowrap gap-1 h-auto">
+            <>
+            {editor  && 
+            <BubbleMenu className="flex flex-wrap items-center gap-2 bg-background shadow-md p-2 rounded-lg border" tippyOptions={{ duration: 100 }} editor={editor}>
+                <div>
                 <ToggleMenu size={'sm'} label={LabelMenubar.BOLD} onClick={() => editor.chain().focus().toggleBold().run()}
                     className={editor.isActive('bold') ? 'is-active' : ''}
                 >
@@ -103,6 +105,8 @@ const MenuBar: React.FC<Props> = ({ editor}) => {
                     <TextNumberListLtr24Filled className="size-5" />
                 </ToggleMenu>
             </div>
+            </BubbleMenu> }
+            </>
     )
 }
 export default MenuBar

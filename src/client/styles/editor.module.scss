@@ -4,10 +4,11 @@
   }
 }
 .element{
-  background-color: var(--background);
+  background-color: #ffffff50;
 }
 .editor {
-    accent-color: hsl(var(--muted));
+    height: 100%;
+    width: 100%;
   }
   .editor > div {
     padding: 1rem;
