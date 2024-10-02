@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
 import { NoteItem, NoteState } from '../../types'
+import { fetchNotes } from '@/api/notes-api'
 
 const initialState: NoteState = {
     notes: [],
@@ -8,8 +9,9 @@ const initialState: NoteState = {
     activeNoteId: '',
     selectedNotesIds: [],
     searchValue: '',
-    error: '',
+    error: null,
     loading: true,
+    status: 'loading',
   }
 
 const notesSlice = createSlice({
@@ -83,7 +85,21 @@ const notesSlice = createSlice({
                 note.id === payload.noteId ? { ...note, category: payload.categoryId } : note
               )
           },
-    }
+    },
+    extraReducers: (builder) => { 
+        builder
+          .addCase(fetchNotes.pending, (state) => {
+            state.status = 'loading';
+          })
+          .addCase(fetchNotes.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.notes = action.payload;
+          })
+          .addCase(fetchNotes.rejected, (state, action) => {
+            state.status = 'failed';
+            state.error = action.error.message;
+          });
+      },
 })
 
 export const {

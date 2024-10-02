@@ -1,5 +1,4 @@
 import './App.css'
-import Editor from './components/editor/editor'
 import {
   ResizableHandle,
   ResizablePanel,
@@ -10,6 +9,7 @@ import {isMobile} from 'react-device-detect';
 import { ThemeProvider } from './providers/theme-provider'
 import MobileNotice from './components/global/mobile-notice'
 import SidebarOptions from './components/containers/sidebar-options';
+import NoteEditor from './components/editor/note-editor';
 
 function App() {
 
@@ -29,7 +29,7 @@ function App() {
           <ResizableHandle withHandle className='bg-transparant' />
           <ResizablePanel defaultSize={75}>
             <div className="flex h-full items-center justify-center">
-              <Editor />
+              <NoteEditor />
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>

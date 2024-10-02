@@ -58,7 +58,7 @@
     font-weight: normal;
   }
   code {
-    background-color: hsl(var(--secondary));
+    background-color: hsl(var(--muted));
     border-radius: 0.4rem;
     color: var(--foreground);
     font-size: 0.85rem;
@@ -104,4 +104,22 @@ li::marker {
 }
 ol{
   list-style-type: decimal;
+}
+
+/* Placeholder (at the top) */
+p.is-editor-empty:first-child::before {
+  color: var(--muted);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Placeholder (on every new line) */
+.is-empty::before {
+  color: var(--muted);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
 }

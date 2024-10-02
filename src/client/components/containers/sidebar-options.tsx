@@ -7,6 +7,7 @@ import React from "react"
 import SearchBar from "../search-bar"
 import { debounceEvent } from "@/lib/helpers"
 import { searchNotes } from "@/lib/redux/slice/notes"
+import { Link } from "react-router-dom"
 
 interface SidebarOptionsProps {
     isOpen?: boolean
@@ -37,7 +38,7 @@ const SidebarOptions : React.FC<SidebarOptionsProps> = ({
       )
 
     return (
-        <aside className="p-4 border rounded-2xl mx-2 bg-zinc-100 dark:bg-background h-full">
+        <aside className="p-2 border rounded-2xl mx-2 bg-zinc-100 dark:bg-background h-full">
             <div className="flex items-center justify-between mb-2">
                 <span className="text-xl font-bold">{nameContent}</span>
                 <div>
@@ -51,11 +52,11 @@ const SidebarOptions : React.FC<SidebarOptionsProps> = ({
             </div>
             <SearchBar searchRef={searchRef} searchNotes={_searchNotes} />
             <ScrollArea className="pt-2">
-                <a href="">
-                    <div className="w-full bg-muted p-3 rounded-md">
-                    {nameContent}
+                <Link to="">
+                    <div className="w-full border border-zinc-300 dark:border-muted hover:bg-muted p-3 rounded-md">
+                        {nameContent}
                     </div>
-                </a>
+                </Link>
             </ScrollArea>
         </aside>
     )

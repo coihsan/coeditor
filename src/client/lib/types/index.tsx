@@ -1,4 +1,5 @@
 import { NoteStatus, NotesSortKey } from "../enums"
+import { v4 } from "uuid";
 
 export interface NoteItem {
   id: string
@@ -18,6 +19,18 @@ export interface CategoryItem {
   name: string
 }
 
+export interface TagItem {
+  id: string
+  name: string
+}
+
+export interface Visitor {
+  id: typeof v4
+  name: string
+  avatar?: string
+  isOnline: boolean
+}
+
 export type ReactSubmitEvent = React.FormEvent<HTMLFormElement> | React.FocusEvent<HTMLInputElement>
 
 // =================================================================================================
@@ -29,9 +42,10 @@ export interface NoteState {
   activeNoteId: string
   selectedNotesIds: string[]
   activeCategoryId: string
-  error: string
+  error: null | string | undefined
   loading: boolean
   searchValue: string
+  status?: 'succeeded' | 'loading' | 'failed'
 }
 
 export interface SettingsState {

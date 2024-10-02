@@ -1,21 +1,32 @@
 import css from "../../styles/editor.module.scss"
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import { data } from './node-content'
+import { NodeContent } from './node-content'
+import Placeholder from '@tiptap/extension-placeholder'
 import TextAlign from '@tiptap/extension-text-align'
 import { cn } from "@/lib/utils"
 import MenuBar from "./menubar/menu-bar"
+import React from "react"
 
-const Editor = () => {
+const NoteEditor : React.FC = () => {
 
     const editor = useEditor({
         extensions: [
             StarterKit,
+            Placeholder.configure({
+                placeholder: ({ node }) => {
+                    if (node.type.name === 'heading') {
+                        return 'What’s the title?'
+                    }
+                    
+                    return 'Can you add some further context?'
+                },
+            }),
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
             }),
         ],
-        content: data,
+        content: NodeContent,
     })
 
     return (
@@ -29,4 +40,4 @@ const Editor = () => {
     )
 }
 
-export default Editor
+export default NoteEditor

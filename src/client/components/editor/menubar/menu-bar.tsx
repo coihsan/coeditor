@@ -10,11 +10,15 @@ type Props = {
 
 const MenuBar: React.FC<Props> = ({ editor}) => {
     if (!editor) return null
+    
+    React.useEffect(() => {
+        editor
+    }, [editor])
 
     return (
             <>
             {editor  && 
-            <BubbleMenu className="flex flex-wrap items-center gap-2 bg-background shadow-md p-2 rounded-lg border" tippyOptions={{ duration: 100 }} editor={editor}>
+            <BubbleMenu className="flex flex-wrap items-center gap-2 bg-background dark:bg-zinc-900 shadow-md p-2 rounded-lg border" tippyOptions={{ duration: 100 }} editor={editor}>
                 <div>
                 <ToggleMenu size={'sm'} label={LabelMenubar.BOLD} onClick={() => editor.chain().focus().toggleBold().run()}
                     className={editor.isActive('bold') ? 'is-active' : ''}
