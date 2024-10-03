@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
 import { NoteItem, NoteState } from '../../types'
-import { fetchNotes } from '@/api/notes-api'
+import { fetchNotes } from '@/api'
 
 const initialState: NoteState = {
     notes: [],
-    activeCategoryId: '',
+    activeTagsId: '',
     activeNoteId: '',
     selectedNotesIds: [],
     searchValue: '',
@@ -44,7 +44,7 @@ const notesSlice = createSlice({
         tagsNote: (state, {payload} : PayloadAction<{notesId: string}>) =>{
             const note = state.notes.find((note) => note.id === payload.notesId)
             if (note) {
-                state.activeCategoryId
+                state.activeTagsId
             }
         },
         selectNote: (state, { payload }: PayloadAction<string[]>) => {

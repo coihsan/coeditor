@@ -41,7 +41,7 @@ export interface NoteState {
   notes: NoteItem[]
   activeNoteId: string
   selectedNotesIds: string[]
-  activeCategoryId: string
+  activeTagsId: string
   error: null | string | undefined
   loading: boolean
   searchValue: string

@@ -8,8 +8,8 @@ import Sidebar from './components/sidebar/sidebar'
 import {isMobile} from 'react-device-detect';
 import { ThemeProvider } from './providers/theme-provider'
 import MobileNotice from './components/global/mobile-notice'
-import SidebarOptions from './components/containers/sidebar-options';
 import NoteEditor from './components/editor/note-editor';
+import NoteList from './components/containers/notelist';
 
 function App() {
 
@@ -24,12 +24,12 @@ function App() {
           direction="horizontal"
         >
           <ResizablePanel defaultSize={25}>
-            <SidebarOptions />
+            <NoteList />
           </ResizablePanel>
           <ResizableHandle withHandle className='bg-transparant' />
           <ResizablePanel defaultSize={75}>
             <div className="flex h-full items-center justify-center">
-              <NoteEditor />
+             <NoteEditor />
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>

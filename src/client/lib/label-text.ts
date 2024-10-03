@@ -65,4 +65,8 @@ export enum LabelText {
     TEXT_ALIGN_CENTER = 'Align Center',
     TEXT_ALIGN_RIGHT = 'Align Right',
     TEXT_ALIGN_JUSTIFY = 'Align Justify',
+    HR = "Horizontal Rule",
+    UNDO = "Undo",
+    REDO = "Redo",
+    CLEAR = "Clear"
   }
