@@ -1,22 +1,27 @@
+import { MenuType } from '@/lib/enums';
 import { AppState } from '@/lib/types';
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState : AppState = {
   editable: false,
-  isOpen: true,
+  activeMenu: MenuType.NOTES,
   loading: false,
   darkTheme: false,
+  menu: undefined
 };
 
 const appSlice = createSlice({
-  name: 'editor',
+  name: 'app',
   initialState,
   reducers: {
     setEditableEditor: (state, action) => {
       state.editable = action.payload;
     },
+    setActiveMenu: (state, action: PayloadAction<MenuType>) => {
+      state.activeMenu = action.payload;
+    },
   },
 });
 
-export const { setEditableEditor } = appSlice.actions;
+export const { setEditableEditor, setActiveMenu } = appSlice.actions;
 export default appSlice.reducer;

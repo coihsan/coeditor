@@ -5,10 +5,10 @@ import { Search24Regular } from "@fluentui/react-icons"
 
 interface SearchBarProps {
     searchRef: React.MutableRefObject<HTMLInputElement>
-    searchNotes: (searchValues: string) => void
+    searchQuery: (searchValues: string) => void
 }
 
-const SearchBar = ({ searchRef, searchNotes }: SearchBarProps) => {
+const SearchBar = ({ searchRef, searchQuery }: SearchBarProps) => {
     const [isPending] = useTransition()
     return(
         <div className="relative ml-auto flex-1 md:grow-0">
@@ -21,7 +21,7 @@ const SearchBar = ({ searchRef, searchNotes }: SearchBarProps) => {
                 placeholder={LabelText.SEARCH_NOTES}
                 onChange={(event) =>{
                     event.preventDefault()
-                    searchNotes(event.target.value)
+                    searchQuery(event.target.value)
                 }}
             />
         </div>

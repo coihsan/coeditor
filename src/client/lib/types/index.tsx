@@ -1,4 +1,4 @@
-import { NoteStatus, NotesSortKey } from "../enums"
+import { MenuType, NoteStatus, NotesSortKey } from "../enums"
 import { v4 } from "uuid";
 
 export interface NoteItem {
@@ -56,8 +56,9 @@ export interface SettingsState {
 }
 
 export interface AppState {
+  menu: any;
   editable: boolean
-  isOpen: boolean
+  activeMenu: MenuType
   loading: boolean
   darkTheme: boolean
 }
@@ -66,4 +67,18 @@ export interface RootState {
   appState: AppState;
   noteState: NoteState;
   settingsState: SettingsState;
+}
+
+export const SET_ACTIVE_MENU = 'SET_ACTIVE_MENU';
+
+interface SetActiveMenuAction {
+  type: typeof SET_ACTIVE_MENU;
+  payload: MenuType;
+}
+
+export type MenuActionTypes = SetActiveMenuAction;
+
+
+export interface MenuState {
+  activeMenu: MenuType;
 }

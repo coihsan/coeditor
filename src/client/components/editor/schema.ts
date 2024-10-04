@@ -3,9 +3,9 @@ import { updateNote } from '@/lib/redux/slice/notes'
 import { fetchNotes } from '@/api'
 import { NoteItem } from '@/lib/types'
 
-const dispatch = useDispatch()
 
 const _updateNotes = (note: NoteItem) =>{
+const dispatch = useDispatch()
     dispatch(updateNote(note))
 }
 

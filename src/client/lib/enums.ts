@@ -10,9 +10,11 @@ export enum NotesSortKey {
     Archived,
 }
 
-export enum Menu {
+export enum MenuType {
   NOTES = 'NOTES',
   TAGS = 'TAGS',
   FAVORITES = 'FAVORITES',
   TRASH = 'TRASH',
+  SETTINGS = 'SETTINGS',
+  ACCOUNT = 'ACCOUNT',
 }

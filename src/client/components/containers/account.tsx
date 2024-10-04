@@ -12,7 +12,7 @@ import { NoteItem } from '@/lib/types';
 import { getNotes } from '@/lib/redux/selector';
 import SidebarMenuOptions from '../sidebar/sidebar-menu-options';
 
-const Tagslist = () => {
+const Account = () => {
     const contextMenuRef = useRef<HTMLDivElement>(null)
     const searchRef = useRef() as React.MutableRefObject<HTMLInputElement>
     const dispatch = useDispatch()
@@ -31,10 +31,10 @@ const Tagslist = () => {
     }
 
     return (
-        <SidebarMenuOptions labelName='Tags' searchRef={searchRef} handleSearch={_searchNotes}>
+        <SidebarMenuOptions labelName='Account' searchRef={searchRef} handleSearch={_searchNotes}>
             List Tags
         </SidebarMenuOptions>
     )
 }
 
-export default Tagslist;
+export default Account;
