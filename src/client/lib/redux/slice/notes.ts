@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
-import { NoteItem, NoteState } from '../../types'
+import { NoteItem, NoteState } from '@/lib/types'
 import { fetchNotes } from '@/api'
 
 const initialState: NoteState = {
@@ -14,32 +14,34 @@ const initialState: NoteState = {
     status: 'loading',
   }
 
+export const getFirstNoteId = {
+  notes: [],
+
+}
+
 const notesSlice = createSlice({
     name: 'notes',
     initialState,
     reducers:{
         addNote: (state, { payload }: PayloadAction<NoteItem>) => {
             state.notes.push({
-                id: uuid(),
-                text: payload.text,
-                created: payload.created,
-                lastUpdated: payload.lastUpdated,
-                category: payload.category,
-                isTags: payload.isTags,
-                isPinned: payload.isPinned,
-                isTrash: payload.isTrash,
-                isArchived: payload.isArchived,
-                status: payload.status
+              id: uuid(),
+              title: payload.title,
+              content: payload.content,
+              created: payload.created,
+              lastUpdated: payload.lastUpdated,
+              tags: payload.tags,
+              isTrash: payload.isTrash,
+              isFavorite: payload.isFavorite
             })
         },
         deleteNote: (state, { payload }: PayloadAction<string>) => {
             state.notes = state.notes.filter((note) => note.id !== payload)
         },
-        archiveNote: (state, { payload }: PayloadAction<string>) => {
-            const note = state.notes.find((note) => note.id === payload)
-            if (note) {
-                note.isArchived = !note.isArchived
-            }
+        setFavorite: (state, { payload }: PayloadAction<string>) => {
+            state.notes = state.notes.map((note) =>
+              note.id === payload ? { ...note, isFavorite: !note.isFavorite } : note
+          )
         },
         tagsNote: (state, {payload} : PayloadAction<{notesId: string}>) =>{
             const note = state.notes.find((note) => note.id === payload.notesId)
@@ -56,17 +58,17 @@ const notesSlice = createSlice({
         updateNote: (state, { payload }: PayloadAction<NoteItem>) => {
             const note = state.notes.find((note) => note.id === payload.id)
             if (note) {
-                note.text = payload.text
+                note.content = payload.content
                 note.lastUpdated = payload.lastUpdated
             }
         },
         toggleFavoriteNotes: (state, { payload }: PayloadAction<string>) => {
             state.notes = state.selectedNotesIds.includes(payload)
               ? state.notes.map((note) =>
-                  state.selectedNotesIds.includes(note.id) ? { ...note, favorite: !note.isTags } : note
+                  state.selectedNotesIds.includes(note.id) ? { ...note, favorite: !note.tags } : note
                 )
               : state.notes.map((note) =>
-                  note.id === payload ? { ...note, favorite: !note.isTags } : note
+                  note.id === payload ? { ...note, favorite: !note.tags } : note
                 )
           },
           removeCategoryfromNotes: (state, { payload }: PayloadAction<string>) => {
@@ -105,7 +107,7 @@ const notesSlice = createSlice({
 export const {
     addNote,
     deleteNote,
-    archiveNote,
+    setFavorite,
     tagsNote,
     selectNote,
     searchNotes,

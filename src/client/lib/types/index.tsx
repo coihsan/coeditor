@@ -1,17 +1,15 @@
-import { MenuType, NoteStatus, NotesSortKey } from "../enums"
+import { MenuType, NotesSortKey } from "../enums"
 import { v4 } from "uuid";
 
 export interface NoteItem {
   id: string
-  text: string
+  title: string
+  content: string
   created: string
   lastUpdated: string
-  category?: string
-  isTags?: string | string[]
-  isPinned?: boolean
+  tags?: string | string[]
   isTrash: boolean
-  isArchived: boolean
-  status: NoteStatus
+  isFavorite: boolean
 }
 
 export interface CategoryItem {
@@ -30,6 +28,11 @@ export interface Visitor {
   avatar?: string
   isOnline: boolean
 }
+
+export type ReactMouseEvent =
+  | MouseEvent
+  | React.MouseEvent<HTMLDivElement>
+  | React.ChangeEvent<HTMLSelectElement>
 
 export type ReactSubmitEvent = React.FormEvent<HTMLFormElement> | React.FocusEvent<HTMLInputElement>
 

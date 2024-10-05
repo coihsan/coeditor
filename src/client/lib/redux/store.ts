@@ -1,10 +1,12 @@
 // src/redux/store.js
 import { configureStore } from '@reduxjs/toolkit';
 import appReducer from './slice/app';
+import notesReducer from './slice/notes';
 
 export const store = configureStore({
   reducer: {
     app: appReducer,
+    notes: notesReducer,
   },
 });
 

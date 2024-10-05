@@ -2,22 +2,26 @@ import { v4 } from "uuid";
 import { NoteItem } from "./types";
 import dayjs from "dayjs";
 import { LabelText } from "./label-text";
-import { NoteStatus } from "./enums";
+import { db } from "./db";
 
-export const newNote = (categoryId?: string, tagsId?: string[]): NoteItem => ({
+export const newNote = (title?: string, tagsId?: string[]): NoteItem => ({
   id: v4(),
-  text: '',
+  content: '',
+  title: title || '',
   created: dayjs().format(),
   lastUpdated: dayjs().format(),
-  category: categoryId,
-  isTags: tagsId,
+  tags: tagsId,
   isTrash: false,
-  isArchived: false,
-  status: NoteStatus.Active
+  isFavorite: false,
 })
 
-export const copyToClipboard = (text: string) => {
-  navigator.clipboard.writeText(text)
+export const getActiveNote = async (activeNoteId: string) =>{
+    const notesId = db.notes.where('id').equals(activeNoteId).toArray()
+    return notesId
+}
+
+export const copyToClipboard = (content: string) => {
+  navigator.clipboard.writeText(content)
 }
 
 export const getDayJsLocale = (languagetoken: string): string => {
@@ -33,8 +37,8 @@ export const getDayJsLocale = (languagetoken: string): string => {
   }
 }
 
-export const getNotesTitle = (text: string): string => {
-  const noteText = text.trim().match(/[^#]{1,45}/)
+export const getNotesTitle = (title: string): string => {
+  const noteText = title.trim().match(/[^#]{1,45}/)
   return noteText ? noteText[0].trim().split(/\r?\n/)[0] : LabelText.CREATE_NEW_NOTE
 }
 
@@ -47,5 +51,3 @@ export const debounceEvent = <T extends Function>(cb: T, wait = 20) => {
 
   return <T>(<any>callable)
 }
-
-export const getActiveNotes = (notes: NoteItem[], activeNoteId: string) => notes.find((note) => note.id === activeNoteId)

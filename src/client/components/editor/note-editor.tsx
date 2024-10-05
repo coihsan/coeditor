@@ -7,15 +7,11 @@ import { cn } from "@/lib/utils"
 import MenuBar from "./menubar/menu-bar"
 import React from "react"
 import { initialContent } from "./schema"
-import { AuthorExtensions } from "./extentions/author"
-import { CreatedAtExtensions } from "./extentions/created-at"
 
 const NoteEditor : React.FC = () => {
 
     const editor = useEditor({
         extensions: [
-            AuthorExtensions,
-            CreatedAtExtensions,
             StarterKit.configure({
                 heading:{
                     levels: [1, 2, 3, 4, 5, 6],
@@ -29,15 +25,15 @@ const NoteEditor : React.FC = () => {
                     color: 'red',
                 },
             }),
-            Placeholder.configure({
-                placeholder: ({ node }) => {
-                    if (node.type.name === 'heading') {
-                        return 'What’s the title?'
-                    }
+            // Placeholder.configure({
+            //     placeholder: ({ node }) => {
+            //         if (node.type.name === 'heading') {
+            //             return 'What’s the title?'
+            //         }
                     
-                    return 'Can you add some further context?'
-                },
-            }),
+            //         return 'Can you add some further context?'
+            //     },
+            // }),
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
             }),

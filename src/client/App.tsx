@@ -5,8 +5,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
 import SidebarMenu from './components/sidebar/sidebar-menu'
-import {isMobile} from 'react-device-detect';
-import { ThemeProvider } from './providers/theme-provider'
+import { isMobile } from 'react-device-detect';
 import MobileNotice from './components/global/mobile-notice'
 import NoteEditor from './components/editor/note-editor';
 import NoteList from './components/containers/notelist';
@@ -31,12 +30,12 @@ function App() {
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
 
-    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-          {isMobile ? (
-            <MobileNotice />
-          ) : (
-            <div className='w-screen h-screen flex p-2'>
-              <SidebarMenu />
+      <main>
+        {isMobile ? (
+          <MobileNotice />
+        ) : (
+          <div className='w-screen h-screen flex p-2'>
+            <SidebarMenu />
             <ResizablePanelGroup
               direction="horizontal"
             >
@@ -51,13 +50,13 @@ function App() {
               <ResizableHandle withHandle className='bg-transparant' />
               <ResizablePanel defaultSize={75}>
                 <div className="flex h-full items-center justify-center">
-                <NoteEditor />
+                  <NoteEditor />
                 </div>
               </ResizablePanel>
             </ResizablePanelGroup>
           </div>
-          )}
-        </ThemeProvider>
+        )}
+      </main>
     </HelmetProvider>
   )
 }
