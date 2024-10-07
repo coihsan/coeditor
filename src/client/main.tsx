@@ -7,6 +7,8 @@ import { store } from './lib/redux/store';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import LandingPage from './components/global/landing-page.tsx';
 import { ThemeProvider } from './providers/theme-provider'
+import NoteEditor from './components/editor/note-editor.tsx';
+import Layout from './components/global/layout.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -15,7 +17,8 @@ createRoot(document.getElementById('root')!).render(
         <BrowserRouter>
             <Routes>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/app" element={<App />} />
+              <Route path="/app" element={<Layout><App /></Layout>} />
+              <Route path="/app/:id" element={<Layout><NoteEditor /></Layout>} />
             </Routes>
         </BrowserRouter>
       </Provider>

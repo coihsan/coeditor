@@ -1,17 +1,22 @@
-import Dexie, { type EntityTable } from 'dexie';
-import { NoteItem } from './types';
+import Dexie, { Table } from 'dexie';
+import { NoteItem, NoteListType, TagItem } from './types';
 
+export class ConotesApp extends Dexie {
+  noteItem!: Table<NoteItem, number>;
+  noteList!: Table<NoteListType, number>;
+  tags!: Table<TagItem, number>;
+  noteTags!: Table<{ noteId: number; tagId: number }, [number, number]>;
 
-const db = new Dexie('notesDatabase') as Dexie & {
-  notes: EntityTable<
-  NoteItem,
-    'id' | 'content' | 'title' | 'tags' | 'isTrash' | 'created' | 'isFavorite' | 'lastUpdated' 
-  >;
-};
+  constructor() {
+    super('conotesApp');
+    this.version(2).stores({
+      noteItem: '++id, content, title, created, isFavorite, lastUpdated, isTrash, tags',
+      noteList: '++id, name, type, notes',
+      tags: '++id, name, color',
+      noteTags: '[noteId+tagId], noteId, tagId'
+    });
+  };
 
-db.version(1).stores({
-  notes: '++id, content, title, tags, isTrash, created, isFavorite, lastUpdated ',
-});
+}
 
-export type { NoteItem };
-export { db };
+export const db = new ConotesApp();

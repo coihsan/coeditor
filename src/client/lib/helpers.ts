@@ -3,9 +3,10 @@ import { NoteItem } from "./types";
 import dayjs from "dayjs";
 import { LabelText } from "./label-text";
 import { db } from "./db";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export const newNote = (title?: string, tagsId?: string[]): NoteItem => ({
-  id: v4(),
+  id: parseInt(v4()),
   content: '',
   title: title || '',
   created: dayjs().format(),
@@ -15,10 +16,20 @@ export const newNote = (title?: string, tagsId?: string[]): NoteItem => ({
   isFavorite: false,
 })
 
-export const getActiveNote = async (activeNoteId: string) =>{
-    const notesId = db.notes.where('id').equals(activeNoteId).toArray()
-    return notesId
+export const getShortUUID = (uuid: string): number => {
+  return parseInt(uuid.slice(0, 8))
 }
+
+export const saveNoteToDB = async (note: NoteItem) => {
+  return await db.noteItem.put(note);
+};
+
+export const fetchNotesFromDB = () => {
+  return useLiveQuery(async () => {
+    const notes = await db.noteItem.toArray();
+    return notes;
+  });
+};
 
 export const copyToClipboard = (content: string) => {
   navigator.clipboard.writeText(content)

@@ -7,8 +7,9 @@
   background-color: #ffffff50;
 }
 .editor {
-    height: 100%;
+    height: max-content;
     width: 100%;
+    overflow: hidden;
   }
   .editor > div {
     padding: 1rem;
@@ -104,20 +105,3 @@ ol{
   list-style-type: decimal;
 }
 
-/* Placeholder (at the top) */
-p.is-editor-empty:first-child::before {
-  color: var(--muted);
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
-}
-
-/* Placeholder (on every new line) */
-.is-empty::before {
-  color: var(--muted);
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
-}

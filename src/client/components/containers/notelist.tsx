@@ -1,43 +1,36 @@
-import React, { useRef, useState } from 'react'
-import { useLiveQuery } from 'dexie-react-hooks';
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useMemo, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import ButtonMenu from '../primitive/button-menu';
-import { addNote, deleteNote, searchNotes, updateNote } from '@/lib/redux/slice/notes';
-import { AddSquare24Regular, Filter24Regular, MoreHorizontal24Regular } from '@fluentui/react-icons';
-import { debounceEvent } from '@/lib/helpers';
+import { addNote, deleteNoteFromState, searchNotes, setActiveNote, updateNote } from '@/lib/redux/slice/notes';
+import { AddSquare24Regular, Filter24Regular, NoteAdd24Regular } from '@fluentui/react-icons';
+import { debounceEvent, getShortUUID } from '@/lib/helpers';
 import SearchBar from '../search-bar';
 import { LabelText } from '@/lib/label-text';
-import { NoteItem, ReactMouseEvent } from '@/lib/types';
-import { getNotes } from '@/lib/redux/selector';
+import { NoteItem } from '@/lib/types';
 import { db } from '@/lib/db';
 import { Separator } from '../ui/separator';
 import { v4 } from 'uuid';
 import dayjs from 'dayjs';
-import { Button } from '../ui/button';
 import SettingsMenuNotes from '../settings/settings-menu-notes';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { Badge } from '../ui/badge';
+import { Link, useNavigate } from 'react-router-dom';
 
 const NoteList = () => {
-    const [ title, setTitle ] = useState('')
-    const [ text, setText ] = useState('')
-    const [ tags, setTags ] = useState([''])
-    const [ date, setDate ] = useState('')
-
-    const [optionsId, setOptionsId] = useState('')
-
-    // const contextMenuRef = useRef<HTMLDivElement>(null)
     const searchRef = useRef() as React.MutableRefObject<HTMLInputElement>
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const notes = useLiveQuery(
-        async () =>{
-            const notes = await db.notes.toArray()
+    const allNotes = useLiveQuery(
+        async () => {
+            const notes = await db.noteItem.toArray()
             return notes
         }
     )
 
     const _addNote = (note: NoteItem) => dispatch(addNote(note))
-    const _deleteNote = (note: NoteItem) => dispatch(deleteNote(note.id))
+    const _deleteNote = (note: NoteItem) => dispatch(deleteNoteFromState(note.id))
     const _updateNote = (note: NoteItem) => dispatch(updateNote(note))
 
     const _searchNotes = debounceEvent(
@@ -47,26 +40,32 @@ const NoteList = () => {
 
     const handleNewNote = async () => {
         try {
-            const newNote = await db.notes.add({
+            const newNoteId = await db.noteItem.add({
                 id: v4(),
-                content: '',
-                title: '',
+                content: 'Hello',
+                title: 'Title1',
                 tags: '',
                 created: dayjs().format('YYYY-MM-DD'),
                 lastUpdated: dayjs().format('YYYY-MM-DD'),
                 isTrash: false,
                 isFavorite: false,
             })
+            const newNote = await db.noteItem.get(newNoteId);
+            if (newNote) {
+                _addNote(newNote as NoteItem);
+                navigate(`/app/${newNote.id}`);
+            } else {
+                console.error('Failed to retrieve the new note.');
+            }
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
-    const handleClickNotesId = (e: ReactMouseEvent, noteId: string = '') => {
-        const clicked = e?.target
+    const handleNoteClick = (note: NoteItem) => {
+        dispatch(setActiveNote(note));
+    };
 
-        if (!clicked) return
-    }
 
     return (
         <aside className='py-4 border rounded-2xl mx-2 bg-zinc-100 dark:bg-white/5 h-full'>
@@ -75,7 +74,7 @@ const NoteList = () => {
                     <span className="text-xl font-bold">{LabelText.NOTES}</span>
                     <div>
                         <ButtonMenu action={handleNewNote} side="bottom" variant={'ghost'} size={'icon'} label={LabelText.CREATE_NEW_NOTE}>
-                            <AddSquare24Regular />
+                            <NoteAdd24Regular />
                         </ButtonMenu>
                         <ButtonMenu side="bottom" variant={'ghost'} size={'icon'} label={LabelText.FILTER}>
                             <Filter24Regular />
@@ -86,18 +85,22 @@ const NoteList = () => {
             </div>
             <Separator className='my-4' orientation='horizontal' />
             <ScrollArea className='h-full pb-32 px-2'>
-                {notes?.length === 0 ? (
+                {allNotes?.length === 0 ? (
                     <div className='p-4 flex items-center justify-center italic text-muted-foreground text-sm'>No one notes it's here</div>
-                ) : (   
+                ) : (
                     <div className='grid grid-cols-1 gap-2'>
-                        {notes?.map((item) => (
-                        <div onClick={handleClickNotesId} role='button' key={item.id} className='flex items-center justify-between p-4 border rounded-xl bg-white hover:bg-muted dark:bg-transparent hover:dark:bg-zinc-900 shadow-sm' >
-                            <div className='flex flex-col'>
-                                <span className='text-xs text-muted-foreground'>{item.tags}</span>
-                                <div className='text-xl font-bold'>{item.title}</div>
-                            </div>
-                            <SettingsMenuNotes />
-                        </div>
+                        {allNotes?.map((item) => (
+                            <Link to={`/app/${item.id}`} onClick={() => handleNoteClick(item)} role='button' key={item.id} className='flex items-center justify-between p-4 border rounded-xl bg-white hover:bg-zinc-950/5 dark:bg-transparent hover:dark:bg-zinc-900 shadow-sm' >
+                                <div className='flex flex-col'>
+                                    {item.tags === '' ? (
+                                        null
+                                    ) : (
+                                        <Badge variant={'secondary'}>{item.tags}</Badge>
+                                    )}
+                                    <div className='text-md font-medium w-full mt-2'>{item.title}</div>
+                                </div>
+                                <SettingsMenuNotes />
+                            </Link>
                         ))}
                     </div>
                 )}

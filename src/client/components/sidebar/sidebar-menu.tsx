@@ -1,6 +1,6 @@
 import { LabelText } from "@/lib/label-text";
 import ButtonMenu from "../primitive/button-menu"
-import { Notepad24Regular, Star24Regular, NumberSymbol24Regular, Delete24Regular, Person24Regular, Settings24Regular } from '@fluentui/react-icons';
+import { Notepad24Regular, Star24Regular, NumberSymbol24Regular, Delete24Regular, Settings24Regular } from '@fluentui/react-icons';
 import { ModeToggle } from "../global/mode-toggle";
 import React from "react";
 import {Logo} from "../global/logo";
@@ -42,9 +42,6 @@ const SidebarMenu : React.FC = () => {
             </div>
                 <div className="grid gap-2">
                     <ModeToggle />
-                    <ButtonMenu action={() => handleMenuClick(MenuType.ACCOUNT)} className={clsx(isActive(MenuType.ACCOUNT) ? 'bg-background text-zinc-900 dark:text-background dark:bg-foreground' : '', 'rounded-full')} side="right" label={LabelText.ACCOUNT} variant={'ghost'} size={'icon'}>
-                        <Person24Regular />
-                    </ButtonMenu>
                     <ButtonMenu action={() => handleMenuClick(MenuType.SETTINGS)} className={clsx(isActive(MenuType.SETTINGS) ? 'bg-background text-zinc-900 dark:text-background dark:bg-foreground' : '', 'rounded-full')} side="right" label={LabelText.SETTINGS} variant={'ghost'} size={'icon'}>
                         <Settings24Regular />
                     </ButtonMenu>

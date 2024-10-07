@@ -11,7 +11,12 @@ export interface NoteItem {
   isTrash: boolean
   isFavorite: boolean
 }
-
+export interface NoteListType {
+  id: string
+  title: string
+  tags?: string | string[]
+  isFavorite: boolean
+}
 export interface CategoryItem {
   id: string
   name: string
@@ -19,7 +24,7 @@ export interface CategoryItem {
 
 export interface TagItem {
   id: string
-  name: string
+  name: string[]
 }
 
 export interface Visitor {
@@ -42,7 +47,7 @@ export type ReactSubmitEvent = React.FormEvent<HTMLFormElement> | React.FocusEve
 
 export interface NoteState {
   notes: NoteItem[]
-  activeNoteId: string
+  activeNoteId: string | null
   selectedNotesIds: string[]
   activeTagsId: string
   error: null | string | undefined

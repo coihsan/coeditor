@@ -7,7 +7,7 @@ type Props = {
     editor: Editor | null,
 }
 
-const MenuBar: React.FC<Props> = ({ editor }) => {
+const BubbleToolbar: React.FC<Props> = ({ editor }) => {
     if (!editor) return null
 
     const menuItems = TextEditorMenuBar(editor);
@@ -24,7 +24,7 @@ const MenuBar: React.FC<Props> = ({ editor }) => {
                         <ToggleMenu size={'sm'} label={item.label} onClick={item.onClick} key={index} disabled={item.disabled}
                             className={item.className}
                         >
-                            <div className="size-5">
+                            <div className="size-5 flex items-center justify-center">
                                 <item.icon />
                             </div>
                         </ToggleMenu>
@@ -33,4 +33,4 @@ const MenuBar: React.FC<Props> = ({ editor }) => {
         </>
     )
 }
-export default MenuBar
+export default BubbleToolbar

@@ -29,6 +29,6 @@
       "@components/ui/*": ["src/client/components/ui/*"],
     }
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./tests/unit/**/*"],
   "exclude": ["./dist"]
 }
