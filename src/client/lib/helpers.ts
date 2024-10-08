@@ -6,7 +6,7 @@ import { db } from "./db";
 import { useLiveQuery } from "dexie-react-hooks";
 
 export const newNote = (title?: string, tagsId?: string[]): NoteItem => ({
-  id: parseInt(v4()),
+  id: v4(),
   content: '',
   title: title || '',
   created: dayjs().format(),
@@ -15,10 +15,6 @@ export const newNote = (title?: string, tagsId?: string[]): NoteItem => ({
   isTrash: false,
   isFavorite: false,
 })
-
-export const getShortUUID = (uuid: string): number => {
-  return parseInt(uuid.slice(0, 8))
-}
 
 export const saveNoteToDB = async (note: NoteItem) => {
   return await db.noteItem.put(note);

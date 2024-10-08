@@ -5,7 +5,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import React from "react"
-import { Toggle } from "../ui/toggle"
+import {
+    ToggleGroup,
+    ToggleGroupItem,
+  } from "@/components/ui/toggle-group"
 
 interface ButtonMenuProps {
     children: React.ReactNode
@@ -30,14 +33,18 @@ const ToggleMenu : React.FC<ButtonMenuProps> = ({
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger>
-                    <Toggle
-                        size={size}
-                        className={className}
-                        onClick={onClick}
-                        disabled={disabled}
-                    >
-                        {children}
-                    </Toggle>
+                    <ToggleGroup type="multiple">
+                        <ToggleGroupItem
+                            value={label}
+                            aria-label={label}
+                            size={size}
+                            className={className}
+                            onClick={onClick}
+                            disabled={disabled}
+                        >
+                            {children}
+                        </ToggleGroupItem>
+                    </ToggleGroup>
                 </TooltipTrigger>
                 <TooltipContent side={side}>
                     <p>{label}</p>

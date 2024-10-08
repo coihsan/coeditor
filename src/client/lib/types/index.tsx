@@ -64,11 +64,10 @@ export interface SettingsState {
 }
 
 export interface AppState {
-  menu: any;
+  menuToolbar: boolean;
   editable: boolean
   activeMenu: MenuType
   loading: boolean
-  darkTheme: boolean
 }
 
 export interface RootState {

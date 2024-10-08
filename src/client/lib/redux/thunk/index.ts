@@ -4,7 +4,7 @@ import { NoteItem } from '@/lib/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { deleteNoteFromState, updateNote } from '../slice/notes';
 
-export const loadNotes = createAsyncThunk(
+export const fetchNotes = createAsyncThunk(
     'notes/loadNotes',
     async (_, { rejectWithValue }) => {
         try {
@@ -37,7 +37,6 @@ export const deleteNote = createAsyncThunk(
       const numericNoteId = Number(noteId);
       await db.noteItem.delete(numericNoteId);
       dispatch(deleteNoteFromState(noteId)); 
-
       return noteId;
     } catch (error) {
       console.error('Error deleting note:', error);

@@ -20,14 +20,15 @@ import {
   } from "@/components/ui/alert-dialog"
 
 type SettingMenuProps = {
-    context?: 'notes' | 'tags' | 'favorites' | 'trash'
+    className?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-const SettingMenuNotes : React.FC<SettingMenuProps> = () => {
+const SettingMenuNotes : React.FC<SettingMenuProps> = ({ className, onClick }) => {
     return(
         <AlertDialog>
             <DropdownMenu>
-            <DropdownMenuTrigger><MoreHorizontal16Regular /></DropdownMenuTrigger>
+            <DropdownMenuTrigger className={className}><MoreHorizontal16Regular /></DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem className="flex items-center gap-3">
                     <Edit24Regular className="size-5" />

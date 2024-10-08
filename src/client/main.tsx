@@ -9,6 +9,8 @@ import LandingPage from './components/global/landing-page.tsx';
 import { ThemeProvider } from './providers/theme-provider'
 import NoteEditor from './components/editor/note-editor.tsx';
 import Layout from './components/global/layout.tsx';
+import { Toaster } from "@/components/ui/toaster"
+import { Toaster as ToasterSonner } from 'sonner'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,9 +20,11 @@ createRoot(document.getElementById('root')!).render(
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/app" element={<Layout><App /></Layout>} />
-              <Route path="/app/:id" element={<Layout><NoteEditor /></Layout>} />
+              <Route path="/app/:noteId" element={<Layout><NoteEditor /></Layout>} />
             </Routes>
         </BrowserRouter>
+        <Toaster />
+        <ToasterSonner position="top-center" />
       </Provider>
     </ThemeProvider>
   </StrictMode>,

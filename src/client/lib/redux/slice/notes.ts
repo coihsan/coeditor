@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
 import { NoteItem, NoteState } from '@/lib/types'
-import { loadNotes, saveNote } from '../thunk'
+import { fetchNotes, saveNote } from '../thunk'
 
 const initialState: NoteState = {
   notes: [],
@@ -35,6 +35,9 @@ const notesSlice = createSlice({
         isFavorite: payload.isFavorite
       })
     },
+    searchQuery : (state, {payload} : PayloadAction<string>) =>{
+      state.searchValue = payload
+    } ,
     setNotes: (state, action: PayloadAction<NoteItem[]>) => {
       state.notes = action.payload;
     },
@@ -61,9 +64,6 @@ const notesSlice = createSlice({
     selectNote: (state, { payload }: PayloadAction<string[]>) => {
       state.selectedNotesIds = payload
     },
-    searchNotes: (state, { payload }: PayloadAction<string>) => {
-      state.searchValue = payload
-    },
     updateNote: (state, { payload }: PayloadAction<NoteItem>) => {
       const note = state.notes.find((note) => note.id === payload.id)
       if (note) {
@@ -73,18 +73,18 @@ const notesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Handle loadNotes
+    // Handle fetchNotes
     builder
-      .addCase(loadNotes.pending, (state) => {
+      .addCase(fetchNotes.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(loadNotes.fulfilled, (state, action) => {
+      .addCase(fetchNotes.fulfilled, (state, action) => {
         state.loading = false;
         state.notes = action.payload ?? [];
       })
 
-      .addCase(loadNotes.rejected, (state, action) => {
+      .addCase(fetchNotes.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
@@ -113,6 +113,7 @@ const notesSlice = createSlice({
 
 export const {
   addNote,
+  searchQuery,
   deleteNoteFromState,
   setActiveNote,
   setActiveTags,
@@ -120,7 +121,6 @@ export const {
   setFavorite,
   tagsNote,
   selectNote,
-  searchNotes,
   updateNote,
 } = notesSlice.actions
 

@@ -1,11 +1,9 @@
-import React, { useMemo, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useRef } from 'react'
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import ButtonMenu from '../primitive/button-menu';
-import { addNote, deleteNoteFromState, searchNotes, setActiveNote, updateNote } from '@/lib/redux/slice/notes';
-import { AddSquare24Regular, Filter24Regular, NoteAdd24Regular } from '@fluentui/react-icons';
-import { debounceEvent, getShortUUID } from '@/lib/helpers';
-import SearchBar from '../search-bar';
+import { addNote, deleteNoteFromState, searchQuery, setActiveNote, updateNote } from '@/lib/redux/slice/notes';
+import { Filter24Regular, NoteAdd24Regular, Tag24Filled } from '@fluentui/react-icons';
+import SearchBar from '../global/search-bar';
 import { LabelText } from '@/lib/label-text';
 import { NoteItem } from '@/lib/types';
 import { db } from '@/lib/db';
@@ -15,11 +13,17 @@ import dayjs from 'dayjs';
 import SettingsMenuNotes from '../settings/settings-menu-notes';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Badge } from '../ui/badge';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { debounceEvent, getNotesTitle } from "@/lib/helpers"
+import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
+import { RootState } from '@/lib/redux/store';
+import clsx from 'clsx';
+import { useToast } from '@/lib/hooks/use-toast';
 
 const NoteList = () => {
+    const { toast } = useToast()
+    const location = useLocation()
     const searchRef = useRef() as React.MutableRefObject<HTMLInputElement>
-    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const allNotes = useLiveQuery(
@@ -29,22 +33,36 @@ const NoteList = () => {
         }
     )
 
+    // =========================DISPATCH========================
+
+    const dispatch = useAppDispatch()
     const _addNote = (note: NoteItem) => dispatch(addNote(note))
     const _deleteNote = (note: NoteItem) => dispatch(deleteNoteFromState(note.id))
     const _updateNote = (note: NoteItem) => dispatch(updateNote(note))
+    const _searchValues = useAppSelector((state: RootState) => state.notes.searchValue)
 
     const _searchNotes = debounceEvent(
-        (searchValue: string) => dispatch(searchNotes(searchValue)),
+        (searchValue: string) => dispatch(searchQuery(searchValue)),
         100
     )
+
+    const filteredNotes = _searchValues
+        ? allNotes?.filter((note) =>
+            note.title.toLowerCase().includes(_searchValues))
+        : allNotes;
+
+    useEffect(() => {
+        if (_searchValues) return
+    }, [_searchNotes])
+
 
     const handleNewNote = async () => {
         try {
             const newNoteId = await db.noteItem.add({
                 id: v4(),
                 content: 'Hello',
-                title: 'Title1',
-                tags: '',
+                title: '',
+                tags: 'Document',
                 created: dayjs().format('YYYY-MM-DD'),
                 lastUpdated: dayjs().format('YYYY-MM-DD'),
                 isTrash: false,
@@ -53,6 +71,10 @@ const NoteList = () => {
             const newNote = await db.noteItem.get(newNoteId);
             if (newNote) {
                 _addNote(newNote as NoteItem);
+                toast({
+                    title: "Success",
+                    description: "New note created successfully",
+                })
                 navigate(`/app/${newNote.id}`);
             } else {
                 console.error('Failed to retrieve the new note.');
@@ -65,7 +87,6 @@ const NoteList = () => {
     const handleNoteClick = (note: NoteItem) => {
         dispatch(setActiveNote(note));
     };
-
 
     return (
         <aside className='py-4 border rounded-2xl mx-2 bg-zinc-100 dark:bg-white/5 h-full'>
@@ -84,25 +105,32 @@ const NoteList = () => {
                 <SearchBar searchRef={searchRef} searchQuery={_searchNotes} />
             </div>
             <Separator className='my-4' orientation='horizontal' />
-            <ScrollArea className='h-full pb-32 px-2'>
-                {allNotes?.length === 0 ? (
-                    <div className='p-4 flex items-center justify-center italic text-muted-foreground text-sm'>No one notes it's here</div>
+            <ScrollArea className='h-full pb-28 px-2'>
+                {filteredNotes?.length === 0 ? (
+                    <div className='w-full p-4 flex items-center justify-center italic text-muted-foreground text-sm'>No notes it's here</div>
                 ) : (
-                    <div className='grid grid-cols-1 gap-2'>
-                        {allNotes?.map((item) => (
-                            <Link to={`/app/${item.id}`} onClick={() => handleNoteClick(item)} role='button' key={item.id} className='flex items-center justify-between p-4 border rounded-xl bg-white hover:bg-zinc-950/5 dark:bg-transparent hover:dark:bg-zinc-900 shadow-sm' >
-                                <div className='flex flex-col'>
-                                    {item.tags === '' ? (
-                                        null
-                                    ) : (
-                                        <Badge variant={'secondary'}>{item.tags}</Badge>
-                                    )}
-                                    <div className='text-md font-medium w-full mt-2'>{item.title}</div>
-                                </div>
-                                <SettingsMenuNotes />
-                            </Link>
-                        ))}
-                    </div>
+                        <div className='grid grid-cols-1 gap-2'>
+                            {filteredNotes?.map((item) => (
+                                <Link to={`/app/${item.id}`} onClick={() => handleNoteClick(item)}
+                                key={item.id} 
+                                className={clsx('flex items-center justify-between px-6 py-4 border rounded-xl shadow-sm', (location.pathname == `/app/${item.id}` && `bg-zinc-200 dark:bg-zinc-800`))} >
+                                    <div className='flex flex-col'>
+                                        <div className='text-xs font-medium w-full' aria-label={item.title}>
+                                            {getNotesTitle(item.title)}
+                                        </div>
+                                        <div>
+                                            {item.tags &&
+                                                <div className='flex items-center gap-3 mt-3'>
+                                                    <Tag24Filled className='size-4 text-muted-foreground' />
+                                                    <Badge variant={'outline'}># {item.tags}</Badge>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <SettingsMenuNotes />
+                                </Link>
+                            ))}
+                        </div>
                 )}
                 <ScrollBar orientation="vertical" />
             </ScrollArea>
