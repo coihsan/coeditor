@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
 import { NoteItem, NoteState } from '@/lib/types'
-import { fetchNotes, saveNote } from '../thunk'
+import { createNote, fetchNotes, saveNote } from '../thunk'
 
 const initialState: NoteState = {
   notes: [],
@@ -67,15 +67,20 @@ const notesSlice = createSlice({
     updateNote: (state, { payload }: PayloadAction<NoteItem>) => {
       const note = state.notes.find((note) => note.id === payload.id)
       if (note) {
+        note.title = payload.title
         note.content = payload.content
         note.lastUpdated = payload.lastUpdated
       }
     },
   },
   extraReducers: (builder) => {
+    // Handle new note 
+    builder.addCase(createNote.fulfilled, (state, action: PayloadAction<NoteItem>) => {
+      state.notes.push(action.payload);
+    });
+
     // Handle fetchNotes
-    builder
-      .addCase(fetchNotes.pending, (state) => {
+    builder.addCase(fetchNotes.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -83,15 +88,13 @@ const notesSlice = createSlice({
         state.loading = false;
         state.notes = action.payload ?? [];
       })
-
       .addCase(fetchNotes.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
 
     // Handle saveNote
-    builder
-      .addCase(saveNote.pending, (state) => {
+    builder.addCase(saveNote.pending, (state) => {
         state.loading = true;
         state.error = null;
       })

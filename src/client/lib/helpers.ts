@@ -16,6 +16,7 @@ export const newNote = (title?: string, tagsId?: string[]): NoteItem => ({
   boomark: false,
 })
 
+
 export const saveNoteToDB = async (note: NoteItem) => {
   return await db.noteItem.put(note);
 };

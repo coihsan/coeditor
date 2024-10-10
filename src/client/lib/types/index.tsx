@@ -11,6 +11,7 @@ export interface NoteItem {
   trash: boolean
   boomark: boolean
 }
+
 export interface NoteListType {
   id: string
   title: string

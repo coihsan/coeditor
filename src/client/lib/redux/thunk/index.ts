@@ -4,6 +4,22 @@ import { NoteItem } from '@/lib/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { deleteNoteFromState, updateNote } from '../slice/notes';
 
+
+export const createNote = createAsyncThunk(
+  'note/createNote',
+  async (note: NoteItem, { rejectWithValue }) => {
+    try {
+      const response = await db.noteItem.add(note);
+      return {
+        ...note,
+        response,
+      };
+    } catch (error) {
+      return rejectWithValue(error); 
+    }
+  }
+);
+
 export const fetchNotes = createAsyncThunk(
     'notes/loadNotes',
     async (_, { rejectWithValue }) => {
