@@ -9,11 +9,8 @@ export class ConotesApp extends Dexie {
 
   constructor() {
     super('conotesApp');
-    this.version(2).stores({
-      noteItem: '++id, content, title, created, isFavorite, lastUpdated, isTrash, tags',
-      noteList: '++id, name, type, notes',
-      tags: '++id, name, color',
-      noteTags: '[noteId+tagId], noteId, tagId'
+    this.version(3).stores({
+      noteItem: '++id, content, title, created, boomark, lastUpdated, trash, tags',
     });
   };
 

@@ -72,3 +72,12 @@
     @apply bg-background dark:bg-[#070709] text-foreground fixed subpixel-antialiased;
   }
 }
+
+@layer components {
+  .sidebarMenu{
+    @apply rounded-xl hover:dark:bg-muted hover:dark:text-foreground w-full h-9 pl-4 flex items-center justify-start gap-4
+  }
+  .sidebarOption{
+    @apply py-4 border rounded-2xl mx-2 bg-zinc-100 dark:bg-transparent h-full
+  }
+}

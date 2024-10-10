@@ -13,7 +13,8 @@ export enum NotesSortKey {
 export enum MenuType {
   NOTES = 'NOTES',
   TAGS = 'TAGS',
-  FAVORITES = 'FAVORITES',
+  FOLDER = "FOLDER",
+  BOOMARK = 'BOOMARK',
   TRASH = 'TRASH',
   SETTINGS = 'SETTINGS',
   ACCOUNT = 'ACCOUNT',

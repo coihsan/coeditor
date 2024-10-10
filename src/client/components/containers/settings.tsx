@@ -10,7 +10,7 @@ const Settings = () => {
 
 
     return (
-        <aside className='py-4 border rounded-2xl mx-2 bg-zinc-100 dark:bg-white/5 h-full'>
+        <aside className='sidebarOption'>
             <div className="flex items-center justify-between mb-2 px-4 pb-4">
                 <span className="text-xl font-bold">{LabelText.SETTINGS}</span>
             </div>

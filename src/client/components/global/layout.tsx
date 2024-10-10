@@ -10,9 +10,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/redux/store';
 import { MenuType } from '@/lib/enums';
 import Tagslist from '@/components/containers/tagslist';
-import Favorites from '@/components/containers/favorites';
+import Boomark from '@/components/containers/boomark';
 import TrashNotes from '@/components/containers/trash';
 import Settings from '@/components/containers/settings';
+import Folders from "../containers/folders";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const activeMenu = useSelector((state: RootState) => state.app.activeMenu);
@@ -32,9 +33,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <ResizablePanel defaultSize={25}>
               {activeMenu === MenuType.NOTES && <NoteList />}
               {activeMenu === MenuType.TAGS && <Tagslist />}
-              {activeMenu === MenuType.FAVORITES && <Favorites />}
+              {activeMenu === MenuType.BOOMARK && <Boomark />}
               {activeMenu === MenuType.TRASH && <TrashNotes />}
               {activeMenu === MenuType.SETTINGS && <Settings />}
+              {activeMenu === MenuType.FOLDER && <Folders />}
             </ResizablePanel>
             <ResizableHandle withHandle className='bg-transparant' />
             <ResizablePanel defaultSize={75}>

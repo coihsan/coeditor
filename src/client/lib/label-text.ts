@@ -20,15 +20,18 @@ export enum LabelText {
     EDIT_TAGS = 'Edit tags',
     REMOVE_TAGS = 'Remove Tags',
     RENAME_TAGS = 'Rename tags',
-    
-    // FAVORITE
-    FAVORITES = 'Favorites',
-    MARK_AS_FAVORITE = 'Mark as favorite',
-    REMOVE_FAVORITE = 'Remove favorite',
-    TOGGLE_FAVORITE = 'Toggle favorite',
-    RENAME_FAVORITE = 'Rename favorite',
+
+    // BOOMARK
+    BOOMARK = 'Boomark',
+    CREATE_NEW_BOOMARK = 'Create new boomark',
+    ADD_BOOMARK = 'Add boomark',
+    REMOVE_BOOMARK = 'Remove boomark',
     
     // SETTINGS
+    FOLDER = "Folder",
+    FOLDER_NAME = "Folder name",
+    CREATE_NEW_FOLDER = "Create new folder",
+    EDIT_FOLDER_NAME = "Edit folder name",
     TRASH = 'Trash',
     SETTINGS = 'Settings',
     DELETE = 'Delete',

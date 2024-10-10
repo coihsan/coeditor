@@ -64,9 +64,9 @@ const NoteList = () => {
                 title: '',
                 tags: 'Document',
                 created: dayjs().format('YYYY-MM-DD'),
-                lastUpdated: dayjs().format('YYYY-MM-DD'),
-                isTrash: false,
-                isFavorite: false,
+                lastUpdated: '',
+                trash: false,
+                boomark: false,
             })
             const newNote = await db.noteItem.get(newNoteId);
             if (newNote) {
@@ -89,7 +89,7 @@ const NoteList = () => {
     };
 
     return (
-        <aside className='py-4 border rounded-2xl mx-2 bg-zinc-100 dark:bg-white/5 h-full'>
+        <aside className='sidebarOption'>
             <div className='static px-2'>
                 <div className="flex items-center justify-between mb-2 px-4">
                     <span className="text-xl font-bold">{LabelText.NOTES}</span>
@@ -109,30 +109,28 @@ const NoteList = () => {
                 {filteredNotes?.length === 0 ? (
                     <div className='w-full p-4 flex items-center justify-center italic text-muted-foreground text-sm'>No notes it's here</div>
                 ) : (
-                        <div className='grid grid-cols-1 gap-2'>
-                            {filteredNotes?.map((item) => (
-                                <Link to={`/app/${item.id}`} onClick={() => handleNoteClick(item)}
-                                key={item.id} 
-                                className={clsx('flex items-center justify-between px-6 py-4 border rounded-xl shadow-sm', (location.pathname == `/app/${item.id}` && `bg-zinc-200 dark:bg-zinc-800`))} >
-                                    <div className='flex flex-col'>
-                                        <div className='text-xs font-medium w-full' aria-label={item.title}>
-                                            {getNotesTitle(item.title)}
-                                        </div>
-                                        <div>
-                                            {item.tags &&
-                                                <div className='flex items-center gap-3 mt-3'>
-                                                    <Tag24Filled className='size-4 text-muted-foreground' />
-                                                    <Badge variant={'outline'}># {item.tags}</Badge>
-                                                </div>
-                                            }
-                                        </div>
+                    <div className='grid grid-cols-1 gap-2'>
+                        {filteredNotes?.map((item) => (
+                            <Link to={`/app/${item.id}`} onClick={() => handleNoteClick(item)}
+                                key={item.id}
+                                className={clsx('px-6 flex items-center justify-between py-4 hover:bg-zinc-50 hover:dark:bg-zinc-900 border rounded-xl shadow-sm', (location.pathname == `/app/${item.id}` && `bg-zinc-50 dark:bg-zinc-900`))} >
+                                <div className='flex flex-col w-full gap-4'>
+                                    <div className='font-medium w-full' aria-label={item.title}>
+                                        {getNotesTitle(item.title)}
                                     </div>
-                                    <SettingsMenuNotes />
-                                </Link>
-                            ))}
-                        </div>
+                                    {item.tags &&
+                                        <div className='flex items-center gap-3'>
+                                            <Tag24Filled className='size-4 text-muted-foreground' />
+                                            <Badge variant={'outline'}># {item.tags}</Badge>
+                                        </div>
+                                    }
+                                </div>
+                                <SettingsMenuNotes />
+                            </Link>
+                        ))}
+                    </div>
                 )}
-                <ScrollBar orientation="vertical" />
+                <ScrollBar className='pl-3' orientation="vertical" />
             </ScrollArea>
         </aside>
     )

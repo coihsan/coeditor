@@ -12,8 +12,8 @@ export const newNote = (title?: string, tagsId?: string[]): NoteItem => ({
   created: dayjs().format(),
   lastUpdated: dayjs().format(),
   tags: tagsId,
-  isTrash: false,
-  isFavorite: false,
+  trash: false,
+  boomark: false,
 })
 
 export const saveNoteToDB = async (note: NoteItem) => {

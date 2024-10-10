@@ -11,7 +11,7 @@ const TrashNotes = () => {
 
 
     return (
-        <aside className='py-4 border rounded-2xl mx-2 bg-zinc-100 dark:bg-white/5 h-full'>
+        <aside className='sidebarOption'>
             <div className='static pb-4 px-2 '>
                 <div className="flex items-center justify-between mb-2 px-4">
                     <span className="text-xl font-bold">{LabelText.TRASH}</span>

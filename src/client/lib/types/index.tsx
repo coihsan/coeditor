@@ -8,14 +8,14 @@ export interface NoteItem {
   created: string
   lastUpdated: string
   tags?: string | string[]
-  isTrash: boolean
-  isFavorite: boolean
+  trash: boolean
+  boomark: boolean
 }
 export interface NoteListType {
   id: string
   title: string
   tags?: string | string[]
-  isFavorite: boolean
+  boomark: boolean
 }
 export interface CategoryItem {
   id: string

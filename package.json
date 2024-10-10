@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fluentui/react-icons": "^2.0.258",
+    "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-checkbox": "^1.1.1",
@@ -50,6 +51,7 @@
     "marked-react": "^2.0.0",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
+    "react-beautiful-dnd": "^11.0.2",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",

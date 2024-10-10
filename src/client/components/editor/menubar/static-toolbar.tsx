@@ -22,7 +22,7 @@ const StaticToolbar: React.FC<Props> = ({ editor }) => {
                 <ToggleMenu size={'sm'} label={item.label} onClick={item.onClick} key={index} disabled={item.disabled}
                     className={item.className}
                 >
-                    <div className="size-5 flex items-center justify-center">
+                    <div className="flex items-center justify-center">
                         <item.icon />
                     </div>
                 </ToggleMenu>

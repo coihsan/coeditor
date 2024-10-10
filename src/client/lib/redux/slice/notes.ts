@@ -31,8 +31,8 @@ const notesSlice = createSlice({
         created: payload.created,
         lastUpdated: payload.lastUpdated,
         tags: payload.tags,
-        isTrash: payload.isTrash,
-        isFavorite: payload.isFavorite
+        trash: payload.trash,
+        boomark: payload.boomark
       })
     },
     searchQuery : (state, {payload} : PayloadAction<string>) =>{
@@ -50,9 +50,9 @@ const notesSlice = createSlice({
     deleteNoteFromState: (state, action: PayloadAction<string>) => {
       state.notes = state.notes.filter(note => note.id !== action.payload);
     },
-    setFavorite: (state, { payload }: PayloadAction<string>) => {
+    setBoomark: (state, { payload }: PayloadAction<string>) => {
       state.notes = state.notes.map((note) =>
-        note.id === payload ? { ...note, isFavorite: !note.isFavorite } : note
+        note.id === payload ? { ...note, isFavorite: !note.boomark } : note
       )
     },
     tagsNote: (state, { payload }: PayloadAction<{ notesId: string }>) => {
@@ -118,7 +118,7 @@ export const {
   setActiveNote,
   setActiveTags,
   setNotes,
-  setFavorite,
+  setBoomark,
   tagsNote,
   selectNote,
   updateNote,
