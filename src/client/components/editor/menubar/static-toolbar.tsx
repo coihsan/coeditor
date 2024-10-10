@@ -17,7 +17,7 @@ const StaticToolbar: React.FC<Props> = ({ editor }) => {
     }, [editor])
 
     return (
-        <div className="flex flex-wrap items-center h-10 gap-1 px-2 bg-muted dark:bg-zinc-900 shadow-sm border-b-[1px]">
+        <div className="flex flex-wrap items-center h-10 gap-1 px-2 bg-muted dark:bg-gray-900 shadow-sm border-b-[1px]">
             {menuItems.map((item, index) => (
                 <ToggleMenu size={'sm'} label={item.label} onClick={item.onClick} key={index} disabled={item.disabled}
                     className={item.className}

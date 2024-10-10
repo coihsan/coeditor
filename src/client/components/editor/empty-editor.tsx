@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const EmptyEditor = () =>{
     return(
-        <div className="h-full flex justify-center items-center p-2 rounded-2xl border bg-zinc-50 dark:bg-zinc-900">
+        <div className="h-full flex justify-center items-center p-2 rounded-2xl border bg-gray-50 dark:bg-gray-900">
            <div>
                 <h1 className="text-4xl font-semibold">Conotes App</h1>
                 <p className="text-muted-foreground">A web-based notes app for everyone</p>

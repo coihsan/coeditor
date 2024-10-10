@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils"
 import React, { useEffect, useState } from "react"
 import { RootState } from "@/lib/redux/store"
 import { useParams } from 'react-router-dom';
-import { useLiveQuery } from "dexie-react-hooks"
-import { db } from "@/lib/db"
 import { Input } from "../ui/input"
 import { ScrollArea, ScrollBar } from "../ui/scroll-area"
 import { setEditableEditor } from "@/lib/redux/slice/app"
@@ -26,31 +24,26 @@ const NoteEditor: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const notes = useAppSelector((state: RootState) => state.notes.notes);
-    const [title, setTitle] = useState(notes.find((note) => note.id === noteId)?.title)
-
-    const noteContentId = useLiveQuery(async () => {
-        const response = await db.noteItem.toArray();
-        return response.find((item) => item.id.toString() === noteId)?.content;
-        }
-    )
-
+    const [ title, setTitle ] = useState(notes.find((note) => noteId === note.id)?.title)
+    const [ contentNotes, setContentNotes ] = useState(notes.find((note) => noteId === note.id)?.content)
     const editable = useAppSelector((state: RootState) => state.app.editable);
+
     useEffect(() => {
         if (editable) {
-            dispatch(setEditableEditor(true))
-        } 
-    }, [editable])
+            dispatch(setEditableEditor(true));
+        }
+        }, [editable]);
 
     const saveNoteToDB = async () => {
         if (editor && noteId && title) {
             try {
                 const note: NoteItem = {
                     id: noteId,
-                    content: noteContentId || '',
+                    content: contentNotes || '',
                     created: dayjs().format(),
                     lastUpdated: dayjs().format(),
                     trash: false,
-                    title: title,
+                    title: title || '',
                     tags: [],
                     boomark: false
                 };
@@ -63,7 +56,11 @@ const NoteEditor: React.FC = () => {
 
     const editor = useEditor({
         extensions: [
-            StarterKit,
+            StarterKit.configure({
+                heading:{
+                    levels: [1, 2, 3, 4, 5, 6],
+                }
+            }),
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
             }),
@@ -72,18 +69,22 @@ const NoteEditor: React.FC = () => {
             }),
         ],
         editable: editable,
-        content: noteContentId,
+        content: contentNotes,
+        onUpdate: ({ editor }) => {
+            setContentNotes(editor.getHTML())
+            saveNoteToDB();
+        },
     })
 
     return (
         <div className="border rounded-2xl flex flex-col h-full w-full">
-            <div className="border-b-[1px] py-4 px-4 static flex items-center justify-between">
+            <div className="border-b-[1px] py-2 px-4 static flex items-center justify-between">
                     <Input
                         onChange={(e) => {
                             setTitle(e.target.value);
                             saveNoteToDB();
                         }}
-                        className="text-xl bg-red-900 max-w-screen-sm px-0 font-medium border-none rounded-none"
+                        className="text-xl max-w-screen-sm px-0 font-medium border-none rounded-none"
                         value={title} 
                         type="text"
                         placeholder={title ? title : "Title"}
@@ -108,7 +109,6 @@ const NoteEditor: React.FC = () => {
                             label={LabelText.EDIT_NOTE}
                             action={() => {
                                 dispatch(setEditableEditor(true));
-                                saveNoteToDB();
                             }} variant={'ghost'} size={'default'}>
                                 <Edit20Filled />
                                 Edit
@@ -126,9 +126,6 @@ const NoteEditor: React.FC = () => {
                     className={cn(css.editor)}
                     editor={editor}
                     placeholder="Write something ..."
-                    onChange={() => {
-                        saveNoteToDB();
-                    }}
                 />
                 <ScrollBar orientation="vertical" />
             </ScrollArea>

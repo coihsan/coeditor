@@ -31,29 +31,29 @@ const SidebarMenu: React.FC = () => {
     };
 
     return (
-        <aside className="rounded-2xl px-2 w-1/5 py-4 border-[1px] bg-zinc-800 dark:bg-zinc-900 text-white border-muted-fourground flex flex-col justify-between h-full">
+        <aside className="rounded-2xl px-2 w-1/5 py-4 border-[1px] bg-gray-800 dark:bg-gray-900 text-white border flex flex-col justify-between h-full">
             <div className="flex flex-col w-full gap-2">
-                <div className='pb-4 flex items-center pl-4 gap-2 w-full'>
+                {/* <div className='pb-4 flex items-center pl-4 gap-2 w-full'>
                     <Logo className="size-9 invert" />
                     <span className='text-2xl font-semibold'>Notes</span>
-                </div>
-                <div className='grid gap-2'>
-                    <div role="button" onClick={() => handleMenuClick(MenuType.NOTES)} className={clsx(isActive(MenuType.NOTES) ? 'bg-background text-zinc-900 dark:text-background dark:bg-foreground' : '', 'sidebarMenu')}>
+                </div> */}
+                <div className='grid gap-1'>
+                    <button onClick={() => handleMenuClick(MenuType.NOTES)} className={clsx(isActive(MenuType.NOTES) ? 'bg-gray-900 text-gray-100 dark:bg-gray-800' : '', 'sidebarMenu')}>
                         <Notepad24Regular />
                         Notes
-                    </div>
-                    <div role="button" onClick={() => handleMenuClick(MenuType.TAGS)} className={clsx(isActive(MenuType.TAGS) ? 'bg-background text-zinc-900 dark:text-background dark:bg-foreground' : '', 'sidebarMenu')}>
+                    </button>
+                    <button onClick={() => handleMenuClick(MenuType.TAGS)} className={clsx(isActive(MenuType.TAGS) ? 'bg-gray-900 text-gray-100 dark:bg-gray-800' : '', 'sidebarMenu')}>
                         <NumberSymbol24Regular />
                         Tags
-                    </div>
-                    <div role="button" onClick={() => handleMenuClick(MenuType.BOOMARK)} className={clsx(isActive(MenuType.BOOMARK) ? 'bg-background text-zinc-900 dark:text-background dark:bg-foreground' : '', 'sidebarMenu')}>
+                    </button>
+                    <button onClick={() => handleMenuClick(MenuType.BOOMARK)} className={clsx(isActive(MenuType.BOOMARK) ? 'bg-gray-900 text-gray-100 dark:bg-gray-800' : '', 'sidebarMenu')}>
                         <Bookmark24Regular />
                         Boomark
-                    </div>
-                    <div role="button" onClick={() => handleMenuClick(MenuType.TRASH)} className={clsx(isActive(MenuType.TRASH) ? 'bg-background text-zinc-900 dark:text-background dark:bg-foreground' : '', 'sidebarMenu')}>
+                    </button>
+                    <button onClick={() => handleMenuClick(MenuType.TRASH)} className={clsx(isActive(MenuType.TRASH) ? 'bg-gray-900 text-gray-100 dark:bg-gray-800' : '', 'sidebarMenu')}>
                         <Delete24Regular />
                         Trash
-                    </div>
+                    </button>
                 </div>
                 <div className='w-full'>
                     <Accordion type="single" collapsible>
@@ -78,10 +78,10 @@ const SidebarMenu: React.FC = () => {
                 </div>
             </div>
             <div className="grid gap-2">
-                <div role="button" onClick={() => handleMenuClick(MenuType.SETTINGS)} className={clsx(isActive(MenuType.SETTINGS) ? 'bg-background text-zinc-900 dark:text-background dark:bg-foreground' : '', 'sidebarMenu')}>
+                <button onClick={() => handleMenuClick(MenuType.SETTINGS)} className={clsx(isActive(MenuType.SETTINGS) ? 'bg-gray-900 text-gray-100 dark:bg-gray-800' : '', 'sidebarMenu')}>
                     <Settings24Regular />
                     Settings
-                </div>
+                </button>
                 <ModeToggle />
             </div>
         </aside>

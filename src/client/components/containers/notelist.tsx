@@ -33,8 +33,6 @@ const NoteList = () => {
         }
     )
 
-    // =========================DISPATCH========================
-
     const dispatch = useAppDispatch()
     const _addNote = (note: NoteItem) => dispatch(addNote(note))
     const _deleteNote = (note: NoteItem) => dispatch(deleteNoteFromState(note.id))
@@ -113,7 +111,7 @@ const NoteList = () => {
                         {filteredNotes?.map((item) => (
                             <Link to={`/app/${item.id}`} onClick={() => handleNoteClick(item)}
                                 key={item.id}
-                                className={clsx('px-6 flex items-center justify-between py-4 hover:bg-zinc-50 hover:dark:bg-zinc-900 border rounded-xl shadow-sm', (location.pathname == `/app/${item.id}` && `bg-zinc-50 dark:bg-zinc-900`))} >
+                                className={clsx('px-6 flex items-center justify-between py-4 hover:bg-gray-50 hover:dark:bg-gray-900 border rounded-xl shadow-sm', (location.pathname == `/app/${item.id}` && `bg-gray-50 dark:bg-gray-900`))} >
                                 <div className='flex flex-col w-full gap-4'>
                                     <div className='font-medium w-full' aria-label={item.title}>
                                         {getNotesTitle(item.title)}
